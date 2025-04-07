@@ -62,4 +62,4 @@ const theme = {
   'disabled-bg': '#f5f5f5',
 };
 
-export default theme; 
+module.exports = theme; 
