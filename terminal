@@ -1,0 +1,6 @@
+mkdir ai-shopping
+cd ai-shopping
+# 前端项目
+npx create-react-app frontend
+# 后端项目
+mkdir backend 

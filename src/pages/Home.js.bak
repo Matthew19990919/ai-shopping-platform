@@ -1,0 +1,22 @@
+  return (
+    <div className="home-page">
+      {/* 导航栏（包含顶部登录栏） */}
+      <Navbar />
+
+      {/* 促销公告横幅 */}
+      <PromotionBanner announcements={homeAnnouncements} />
+
+      {/* 主内容区 */}
+      <div className="main-content-wrapper">
+        <div className="main-content">
+          // ... existing code ...
+        </div>
+      </div>
+      
+      {/* 底部区域 */}
+      <Footer />
+    </div>
+  );
+};
+
+export default Home; 

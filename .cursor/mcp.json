@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "actors-mcp-server": {
+      "command": "npx",
+      "args": ["-y", "@apify/actors-mcp-server"],
+      "env": {
+        "APIFY_TOKEN": "apify_api_KeDFQXkTW5Ia90siidmahEsvYjSz1B2frpWX"
+      }
+    },
+    "magic-mcp": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest", "API_KEY=\"95696d80-5196-4154-baac-724bf12cbc3a\""]
+    },
+    "mermaid-mcp": {
+      "command": "env",
+      "args": ["CONTENT_IMAGE_SUPPORTED=false", "npx", "-y", "@peng-shawn/mermaid-mcp-server"]
+    },
+    "doc-mcp": {
+      "command": "npx",
+      "args": ["-y", "@smithery/cli@latest", "install", "@MeterLong/mcp-doc", "--client", "cursor", "--config", "\"{}\""]
+    }
+  }
+} 
