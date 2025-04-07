@@ -1,0 +1,386 @@
+.hourglass-filter {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+  padding: 20px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.hourglass-filter:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.hourglass-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.hourglass-header h3 {
+  color: #333;
+  font-size: 18px;
+  margin: 0;
+}
+
+.product-count {
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  color: #555;
+  font-size: 14px;
+  padding: 5px 12px;
+}
+
+.product-count span {
+  color: #34A853;
+  font-weight: bold;
+}
+
+.hourglass-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* 沙漏顶部 */
+.hourglass-top {
+  width: 100%;
+  height: 30px;
+  background-color: #e0e0e0;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.hourglass-top .hourglass-contents {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(66, 133, 244, 0.3),
+    rgba(66, 133, 244, 0.3) 10px,
+    rgba(66, 133, 244, 0.2) 10px,
+    rgba(66, 133, 244, 0.2) 20px
+  );
+  height: 100%;
+  width: 100%;
+  animation: flow-down 3s infinite;
+}
+
+/* 沙漏阶段 */
+.hourglass-stages {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  position: relative;
+}
+
+.hourglass-stage {
+  padding: 10px 15px;
+  margin: 4px 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hourglass-stage:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.stage-icon {
+  background-color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.hourglass-stage.active .stage-icon {
+  background-color: white;
+}
+
+.stage-info {
+  flex: 1;
+}
+
+.stage-info h4 {
+  margin: 0;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.stage-info h4.active-text {
+  color: white;
+}
+
+.stage-info p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+  max-width: 200px;
+}
+
+.stage-arrow {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #666;
+  z-index: 2;
+}
+
+.hourglass-stage.active .stage-arrow {
+  color: white;
+}
+
+/* 沙漏底部 */
+.hourglass-bottom {
+  width: 30%;
+  height: 30px;
+  background-color: #e0e0e0;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hourglass-bottom .hourglass-contents {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(52, 168, 83, 0.3),
+    rgba(52, 168, 83, 0.3) 10px,
+    rgba(52, 168, 83, 0.2) 10px,
+    rgba(52, 168, 83, 0.2) 20px
+  );
+  height: 100%;
+  width: 100%;
+  animation: flow-up 3s infinite;
+}
+
+/* 当前筛选条件 */
+.current-filters {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #f8f9fc;
+  border-radius: 8px;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.reset-filters-btn {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+
+.reset-filters-btn:hover {
+  background-color: #ff9999;
+  color: #fff;
+}
+
+.current-filters h4 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-tag {
+  background-color: #e1f5fe;
+  border-radius: 16px;
+  color: #0277bd;
+  font-size: 12px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.filter-key {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+/* 筛选条件标签交互样式 */
+.filter-tag:hover {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.filter-actions {
+  display: none;
+  margin-left: 8px;
+}
+
+.filter-tag:hover .filter-actions {
+  display: flex;
+}
+
+.filter-action-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  margin-left: 2px;
+  cursor: pointer;
+  font-size: 10px;
+  color: #0277bd;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.filter-action-btn:hover {
+  background-color: rgba(2, 119, 189, 0.1);
+}
+
+.edit-btn:hover {
+  color: #0288d1;
+}
+
+.delete-btn:hover {
+  color: #f44336;
+}
+
+.save-btn:hover {
+  color: #4caf50;
+}
+
+.cancel-btn:hover {
+  color: #f44336;
+}
+
+/* 编辑模式样式 */
+.filter-edit-mode {
+  display: flex;
+  align-items: center;
+}
+
+.filter-edit-input {
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  padding: 2px 4px;
+  margin: 0 4px;
+  border-radius: 4px;
+  width: 80px;
+  outline: none;
+}
+
+.filter-edit-mode .filter-actions {
+  display: flex;
+}
+
+/* 动画效果 */
+@keyframes flow-down {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes flow-up {
+  0% { transform: translateY(100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+.hourglass-stage.animate {
+  animation: pulse 1s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .hourglass-filter {
+    padding: 15px;
+  }
+  
+  .hourglass-header h3 {
+    font-size: 16px;
+  }
+  
+  .product-count {
+    font-size: 12px;
+  }
+  
+  .stage-info h4 {
+    font-size: 14px;
+  }
+  
+  .stage-info p {
+    font-size: 11px;
+  }
+  
+  .stage-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* 支持深色模式 */
+@media (prefers-color-scheme: dark) {
+  .hourglass-filter {
+    background-color: #2a2a2a;
+  }
+  
+  .hourglass-header h3 {
+    color: #e0e0e0;
+  }
+  
+  .product-count {
+    background-color: #3a3a3a;
+    color: #ccc;
+  }
+  
+  .hourglass-top, .hourglass-bottom {
+    background-color: #444;
+  }
+  
+  .stage-info h4:not(.active-text) {
+    color: #e0e0e0;
+  }
+  
+  .filter-tag {
+    background-color: #1e3a5f;
+    color: #a9d5ff;
+  }
+}

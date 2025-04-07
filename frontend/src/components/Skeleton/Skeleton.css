@@ -1,0 +1,73 @@
+/* 骨架屏样式 */
+
+.product-skeleton {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-skeleton-image {
+  margin-bottom: 16px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.skeleton-image {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.product-skeleton-content {
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.product-skeleton-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skeleton-price {
+  width: 30% !important;
+}
+
+/* 商品列表骨架屏布局 */
+.product-list-skeleton {
+  display: grid;
+  gap: 20px;
+}
+
+.product-list-skeleton.grid-layout {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.product-list-skeleton.list-layout {
+  grid-template-columns: 1fr;
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+  .product-list-skeleton.grid-layout {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-list-skeleton.grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .product-list-skeleton.grid-layout {
+    grid-template-columns: 1fr;
+  }
+} 

@@ -1,0 +1,263 @@
+.ai-assistant-page {
+  min-height: calc(100vh - 60px);
+  padding: 20px 0;
+  background-color: #f5f5f5;
+}
+
+.ai-assistant-container {
+  display: flex;
+  justify-content: center;
+  min-height: 85vh;
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+}
+
+.ai-assistant-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  height: 700px;
+}
+
+.ai-assistant-header {
+  background: linear-gradient(135deg, #5a6bff, #3a4adf);
+  color: white;
+  padding: 25px;
+  position: relative;
+}
+
+.ai-assistant-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.ai-assistant-header p {
+  margin: 8px 0 0;
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 80%;
+}
+
+.ai-assistant-chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.error-message {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 4px solid #ff5252;
+  padding: 10px 15px;
+  margin-top: 15px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.clear-chat-button {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-chat-button:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* 增加一些主题色变量 */
+:root {
+  --primary-color: #5a6bff;
+  --primary-dark: #4a5ae8;
+  --primary-light: #eef0ff;
+  --text-dark: #333;
+  --text-light: #666;
+  --border-color: #e0e0e0;
+  --bg-light: #f9f9f9;
+  --error-color: #ff5252;
+  --success-color: #4caf50;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .ai-assistant-container {
+    padding: 20px 10px;
+  }
+  
+  .ai-assistant-wrapper {
+    height: 80vh;
+  }
+  
+  .ai-assistant-header h1 {
+    font-size: 24px;
+  }
+  
+  .ai-assistant-header p {
+    font-size: 14px;
+  }
+  
+  .clear-chat-button {
+    top: 15px;
+    right: 15px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-assistant-container {
+    padding: 10px;
+  }
+  
+  .ai-assistant-wrapper {
+    border-radius: 12px;
+  }
+  
+  .ai-assistant-header {
+    padding: 15px;
+  }
+  
+  .ai-assistant-header h1 {
+    font-size: 20px;
+  }
+  
+  .ai-assistant-header p {
+    font-size: 12px;
+  }
+  
+  .clear-chat-button {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+/* 美化聊天界面的过渡动画 */
+.ai-assistant-chat {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 侧边栏样式 */
+.ai-assistant-sidebar {
+  width: 300px;
+  background-color: #f9f9f9;
+  border-right: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 20px;
+  background-color: var(--primary-color, #e1251b);
+  color: white;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+.sidebar-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.feature-section, .shortcut-section {
+  margin-bottom: 30px;
+}
+
+.feature-section h3, .shortcut-section h3, .ai-assistant-help h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+  position: relative;
+  padding-left: 12px;
+}
+
+.feature-section h3:before, .shortcut-section h3:before, .ai-assistant-help h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 16px;
+  background-color: var(--primary-color, #e1251b);
+  border-radius: 2px;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.feature-list li i {
+  margin-right: 10px;
+  color: var(--primary-color, #e1251b);
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.shortcut-questions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.shortcut-question {
+  padding: 12px 15px;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shortcut-question:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.ai-assistant-help {
+  padding: 20px;
+  background-color: #f0f7ff;
+  border-top: 1px solid #e6f0ff;
+}
+
+.ai-assistant-help p {
+  margin: 8px 0;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+} 

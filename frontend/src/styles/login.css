@@ -1,0 +1,409 @@
+/* 登录页面样式 */
+.login-page {
+  background-color: #f6f6f6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Microsoft YaHei", "Hiragino Sans GB", "Heiti SC", sans-serif;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+/* 页面头部 */
+.login-header {
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+}
+
+.login-logo {
+  height: 40px;
+  margin-right: 15px;
+}
+
+.login-welcome {
+  font-size: 24px;
+  color: #666;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* 主要内容区 */
+.login-main {
+  display: flex;
+  margin-bottom: 60px;
+  background: url('https://via.placeholder.com/750x470/fafafa/cccccc?text=登录页背景') no-repeat center right;
+  background-size: 750px 470px;
+  min-height: 470px;
+}
+
+/* 登录框 */
+.login-box {
+  width: 350px;
+  background-color: #fff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* 登录标签 */
+.login-tabs {
+  display: flex;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.login-tab {
+  flex: 1;
+  text-align: center;
+  height: 54px;
+  line-height: 54px;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.login-tab.active {
+  color: #e4393c;
+  font-weight: bold;
+}
+
+.login-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 2px;
+  background-color: #e4393c;
+}
+
+/* 登录表单区域 */
+.login-forms {
+  padding: 20px;
+}
+
+.login-form {
+  margin-top: 10px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  height: 42px;
+}
+
+.form-group:focus-within {
+  border-color: #999;
+}
+
+.input-icon {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+}
+
+.form-group input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  padding: 0 12px 0 0;
+  font-size: 14px;
+  outline: none;
+}
+
+.country-code {
+  width: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 14px;
+  border-right: 1px solid #ddd;
+}
+
+.password-toggle {
+  padding: 0 10px;
+  cursor: pointer;
+  color: #999;
+}
+
+.password-toggle:hover {
+  color: #e4393c;
+}
+
+.verification-button {
+  width: 110px;
+  height: 100%;
+  background: none;
+  border: none;
+  border-left: 1px solid #ddd;
+  color: #e4393c;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.verification-button:disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* 表单选项 */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.auto-login {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+}
+
+.auto-login input {
+  margin-right: 5px;
+}
+
+.forgot-link {
+  font-size: 12px;
+  color: #666;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  color: #e4393c;
+}
+
+/* 登录按钮 */
+.login-button {
+  width: 100%;
+  height: 42px;
+  background-color: #e4393c;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #c1272d;
+}
+
+/* 二维码登录 */
+.qrcode-login {
+  padding: 30px 0;
+}
+
+.qrcode-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qrcode-image {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 15px;
+  border: 1px solid #f0f0f0;
+}
+
+.qrcode-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.qrcode-text {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.qrcode-text .highlight {
+  color: #e4393c;
+}
+
+.qrcode-tip {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 登录侧边栏 */
+.login-sidebar {
+  width: 270px;
+  padding: 20px;
+}
+
+.register-entry {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-entry p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.register-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #e4393c;
+  border: 1px solid #e4393c;
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.register-button:hover {
+  background-color: #fef0f0;
+}
+
+/* 其他登录方式 */
+.login-more {
+  margin-top: 40px;
+}
+
+.login-more-title {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.login-more-title::before,
+.login-more-title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 70px;
+  height: 1px;
+  background-color: #e6e6e6;
+}
+
+.login-more-title::before {
+  left: 0;
+}
+
+.login-more-title::after {
+  right: 0;
+}
+
+.login-more-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.more-option {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 12px;
+  color: white;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.qq-icon {
+  background-color: #6eb8fa;
+}
+
+.wechat-icon {
+  background-color: #62CA56;
+}
+
+/* 页脚 */
+.login-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px 0 40px;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #666;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer-links a:hover {
+  color: #e4393c;
+}
+
+.divider {
+  color: #ccc;
+  margin: 0 6px;
+  font-size: 12px;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 添加错误和成功消息样式 */
+.error-message {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #ffebeb;
+  border: 1px solid #ffcaca;
+  color: #e4393c;
+  border-radius: 2px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.success-message {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f0ffed;
+  border: 1px solid #d0ebb8;
+  color: #4caf50;
+  border-radius: 2px;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* 按钮禁用状态 */
+.login-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+} 

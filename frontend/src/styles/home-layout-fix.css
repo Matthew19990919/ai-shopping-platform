@@ -1,0 +1,692 @@
+/* 页面布局修复样式 */
+
+/* 顶部区域容器 - 修改为两列布局 */
+.top-section-container {
+  display: grid !important;
+  grid-template-columns: 280px 1fr !important; /* 调整左侧宽度为280px，使边距更加均匀 */
+  margin-bottom: 24px; /* 增加间距以改善布局呼吸感 */
+  gap: var(--spacing-lg); /* 增加列间距 */
+  background-color: var(--bg-body);
+  min-height: 650px; /* 保证足够高度以显示推荐内容 */
+  max-width: 1200px; /* 确保与主内容区最大宽度一致 */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* 添加全宽类 */
+.full-width {
+  width: 100% !important;
+}
+
+/* 隐藏分类导航卡片 */
+.categories-cards {
+  display: none !important;
+}
+
+/* 右侧卡片区域 - 即左侧内容 */
+.right-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* 统一卡片间距 */
+  height: 100% !important; /* 让它占满整个高度 */
+  grid-column: 1; /* 确保位于左侧列 */
+  max-width: 280px; /* 匹配容器宽度 */
+}
+
+/* 会员专享卡片 */
+.member-card {
+  flex: 1; /* 平均分配空间 */
+  min-height: 160px !important; /* 统一高度 */
+  margin-bottom: 0; /* 去除底部外边距，由gap控制间距 */
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 快讯卡片 */
+.news-card {
+  flex: 1; /* 平均分配空间 */
+  min-height: 160px !important; /* 统一高度 */
+  margin-bottom: 0; /* 去除底部外边距，由gap控制间距 */
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* AI助手卡片 */
+.ai-assistant-card {
+  flex: 1; /* 平均分配空间 */
+  min-height: 160px !important; /* 统一高度 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 0; /* 去除底部外边距，由gap控制间距 */
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+}
+
+/* AI助手内容垂直居中 */
+.ai-assistant-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 15px 15px 5px 15px;
+}
+
+/* 确保AI助手按钮区域有合适的间距 */
+.ai-assistant-actions {
+  padding: 10px 15px 15px 15px;
+}
+
+/* 针对按钮的额外样式调整 */
+.ai-assistant-card .ds-btn {
+  font-weight: 500;
+  min-height: 38px;
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+}
+
+/* 隐藏轮播图区域 */
+.promotion-carousel {
+  display: none !important;
+}
+
+/* 确保轮播图指示器显示正确 */
+.carousel-indicators {
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-xs);
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+  width: 20px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* 推荐区域的位置修复 */
+.right-recommendations {
+  grid-column: 2; /* 位于右侧列 */
+  height: 100%; /* 确保高度一致 */
+  padding: 0;
+  display: grid;
+  grid-template-columns: 3fr 1fr; /* 保持比例 */
+  gap: 20px; /* 增加间距，使布局更加清晰 */
+}
+
+.recommendation-main {
+  width: 100%;
+  border-radius: 10px; /* 统一圆角 */
+  background-color: #fff; /* 增加背景色，增强视觉层次 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+  padding: 16px; /* 添加内边距 */
+  height: 100%; /* 确保高度填充 */
+  display: flex;
+  flex-direction: column;
+}
+
+.recommendation-aside {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 增加卡片间距 */
+  height: 100%; /* 确保高度一致 */
+}
+
+/* 改进右侧卡片样式以适应更窄的宽度 */
+.recommendation-aside .hot-activity-card,
+.recommendation-aside .ai-recommend-card {
+  min-width: 0; /* 确保卡片可以在更窄的容器中正确缩放 */
+  padding: 16px; /* 适当增加内边距 */
+  border-radius: 10px; /* 统一圆角 */
+  flex: 1; /* 平均分配空间 */
+}
+
+/* 热门活动卡片样式增强 */
+.hot-activity-card {
+  background: linear-gradient(135deg, #ff7676, #f54242);
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 16px rgba(249, 64, 64, 0.2); /* 增强阴影效果 */
+  color: white;
+  height: 100%; /* 确保高度一致 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hot-activity-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+  z-index: 1;
+}
+
+.hot-activity-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-30%, 30%);
+  z-index: 1;
+}
+
+.hot-activity-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(249, 64, 64, 0.3);
+}
+
+.recommendation-aside .hot-activity-title {
+  font-size: 15px; /* 稍微减小标题字体 */
+  margin-bottom: 6px;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+}
+
+.recommendation-aside .hot-activity-desc {
+  font-size: 11px; /* 减小描述字体 */
+  margin-bottom: 12px;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+}
+
+.recommendation-aside .hot-activity-countdown {
+  padding: 5px 8px; /* 减小倒计时区域内边距 */
+  font-size: 13px; /* 减小倒计时字体 */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recommendation-aside .hot-activity-button,
+.recommendation-aside .ai-recommend-button {
+  padding: 6px 0; /* 减小按钮内边距 */
+  font-size: 13px; /* 减小按钮字体 */
+  background: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 2;
+  text-decoration: none;
+  display: block;
+}
+
+.recommendation-aside .hot-activity-button {
+  color: #f54242;
+}
+
+.recommendation-aside .hot-activity-button:hover,
+.recommendation-aside .ai-recommend-button:hover {
+  background: #f9f9f9;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* AI推荐卡片样式增强 */
+.ai-recommend-card {
+  background: linear-gradient(135deg, #4a6fff, #26d0ce);
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 16px rgba(74, 111, 255, 0.2); /* 增强阴影 */
+  color: white;
+  height: 100%; /* 确保高度一致 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-recommend-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(40%, -40%);
+  z-index: 1;
+}
+
+.ai-recommend-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-30%, 30%);
+  z-index: 1;
+}
+
+.ai-recommend-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(74, 111, 255, 0.3);
+}
+
+.recommendation-aside .ai-recommend-title {
+  font-size: 15px;
+  margin-bottom: 6px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  z-index: 2;
+}
+
+.recommendation-aside .ai-recommend-desc {
+  font-size: 11px;
+  margin-bottom: 12px;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+}
+
+.recommendation-aside .ai-recommend-label {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.recommendation-aside .ai-recommend-tag {
+  font-size: 10px; /* 减小标签字体 */
+  padding: 2px 6px; /* 减小标签内边距 */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recommendation-aside .ai-recommend-button {
+  color: #4a6fff;
+}
+
+/* 为主内容区添加内边距和阴影 */
+.recommendation-main .personalized-recommendations {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+
+/* 修改personalized-recommendations样式以适应右侧布局 */
+.personalized-recommendations {
+  margin: 0;
+  box-shadow: none;
+  padding: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 修改推荐产品列表样式，增加每行显示的产品数量 */
+.personalized-recommendations .recommended-products-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 减小最小宽度，显示更多列 */
+  gap: 12px; /* 增加统一间距 */
+  overflow-x: visible;
+  overflow-y: auto;
+  max-height: 520px;
+  height: 100%;
+  flex: 1;
+  padding: 8px; /* 统一内边距 */
+}
+
+/* 修改页面整体布局，确保与活动专区对齐 */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* 创建活动专区与推荐区对齐的辅助类 */
+.full-width-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 活动推荐区域 */
+.featured-activities {
+  margin-top: 10px; /* 增加与上部区域的间距 */
+  margin-bottom: 32px; /* 增加与下部区域的间距 */
+  padding: 20px; /* 添加内边距 */
+  background-color: #fff; /* 增加背景色，增强视觉层次 */
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+}
+
+.featured-activities .section-title {
+  position: relative;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  padding-left: 12px;
+}
+
+.featured-activities .section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 18px;
+  background-color: #e1251b;
+  border-radius: 2px;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; /* 统一卡片间距 */
+  margin-top: 16px;
+}
+
+.activities-grid .activity-card {
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+  height: 100%;
+  /* 确保活动卡片高度一致 */
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 促销活动区域 */
+.promotion-section {
+  margin-bottom: 32px; /* 增加与下部区域的间距 */
+  padding: 20px; /* 添加内边距 */
+  background-color: #fff; /* 增加背景色，增强视觉层次 */
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+}
+
+.promotion-section .section-title {
+  position: relative;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  padding-left: 12px;
+}
+
+.promotion-section .section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 18px;
+  background-color: #e1251b;
+  border-radius: 2px;
+}
+
+.promotions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px; /* 统一卡片间距 */
+}
+
+.promotions-grid .promotion-card {
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+  overflow: hidden;
+  /* 确保促销卡片高度一致 */
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 活动卡片内容布局调整 */
+.activity-card-header {
+  padding: 12px;
+}
+
+.activity-products {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+.activity-product {
+  margin-bottom: 12px;
+}
+
+/* 促销卡片内容布局调整 */
+.promotion-image {
+  height: 200px; /* 增加高度以适应更多图片尺寸 */
+  overflow: hidden;
+  position: relative; /* 添加相对定位 */
+  background-color: #f5f5f5; /* 添加背景色 */
+}
+
+.promotion-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 改为 contain 以保持图片比例 */
+  transition: transform 0.3s ease;
+  position: relative; /* 添加相对定位 */
+  z-index: 1; /* 确保图片在最上层 */
+}
+
+.promotion-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.02); /* 添加微弱的遮罩 */
+  z-index: 0;
+}
+
+.promotion-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px; /* 增加内边距 */
+  background-color: #fff; /* 确保背景为白色 */
+}
+
+/* 底部服务保障区域 */
+.service-guarantee {
+  margin-bottom: 32px; /* 增加底部间距 */
+  padding: 24px 20px; /* 添加内边距 */
+  background-color: #fff; /* 增加背景色，增强视觉层次 */
+  border-radius: 10px; /* 统一圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 增强阴影效果 */
+}
+
+.service-items {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px; /* 添加间距 */
+  align-items: stretch; /* 确保各项高度一致 */
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  padding: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.service-item:hover {
+  background-color: #f9f9f9;
+}
+
+.service-icon {
+  font-size: 24px;
+  color: #e1251b;
+  margin-bottom: 12px;
+}
+
+.service-item span {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.service-item p {
+  color: #666;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+  .right-recommendations {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .top-section-container {
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+  
+  .right-cards-container {
+    max-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+  }
+  
+  .right-cards-container > div {
+    flex: 1 1 300px;
+    min-height: 200px !important;
+  }
+  
+  .right-recommendations {
+    grid-column: 1;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    height: auto;
+  }
+  
+  .recommendation-aside {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+  }
+  
+  .recommendation-aside > div {
+    flex: 1 1 300px;
+    min-height: 180px;
+  }
+  
+  .activities-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .promotions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .activities-grid .activity-card,
+  .promotions-grid .promotion-card {
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .personalized-recommendations .recommended-products-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .top-section-container {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .activities-grid,
+  .promotions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-items {
+    flex-wrap: wrap;
+  }
+  
+  .service-item {
+    flex: 1 1 40%;
+    margin-bottom: 16px;
+  }
+  
+  .activities-grid .activity-card,
+  .promotions-grid .promotion-card {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 576px) {
+  .personalized-recommendations .recommended-products-list {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .service-item {
+    flex: 100%;
+  }
+} 

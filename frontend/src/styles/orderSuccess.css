@@ -1,0 +1,237 @@
+/* 订单成功页面样式 */
+
+.success-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.success-card {
+  background-color: var(--bg-container);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-sm);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  animation: scaleIn 0.5s ease;
+  text-align: center;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.success-icon {
+  font-size: 60px;
+  color: var(--success-color);
+  margin-bottom: var(--spacing-md);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.success-title {
+  font-size: 24px;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.success-message {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.success-info {
+  max-width: 500px;
+  margin: 0 auto var(--spacing-xl);
+  text-align: left;
+  padding: var(--spacing-md);
+  background-color: rgba(var(--success-color-rgb), 0.05);
+  border-radius: var(--border-radius-md);
+  border-left: 4px solid var(--success-color);
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: var(--spacing-sm);
+  font-size: 14px;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.info-value {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.success-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.action-button {
+  padding: 10px 25px;
+  border-radius: var(--border-radius-pill);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  min-width: 150px;
+}
+
+.action-button-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.action-button-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-md);
+}
+
+.action-button-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.action-button-outline:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.05);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-sm);
+}
+
+.recommendation-section {
+  margin-top: var(--spacing-xl);
+}
+
+.recommendation-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.recommendation-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.recommendation-item {
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-sm);
+  transition: all var(--transition-normal);
+  background-color: var(--bg-container);
+}
+
+.recommendation-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-md);
+}
+
+.recommendation-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.recommendation-content {
+  padding: var(--spacing-md);
+}
+
+.recommendation-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 42px;
+}
+
+.recommendation-price {
+  color: var(--primary-color);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.countdown {
+  margin: var(--spacing-lg) 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.countdown-time {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .success-card {
+    padding: var(--spacing-lg);
+  }
+  
+  .success-actions {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .action-button {
+    width: 100%;
+  }
+  
+  .recommendation-list {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .success-container {
+    padding: var(--spacing-sm);
+  }
+  
+  .success-card {
+    padding: var(--spacing-md);
+  }
+  
+  .success-icon {
+    font-size: 50px;
+  }
+  
+  .success-title {
+    font-size: 20px;
+  }
+  
+  .success-message {
+    font-size: 14px;
+  }
+} 

@@ -1,0 +1,733 @@
+/* 产品推荐组件样式 - 重新设计 */
+
+/* 基础样式重置 */
+.product-recommendations {
+  margin: 5px; /* 进一步减小边距 */
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 推荐区头部 - 全新设计 */
+.recommendation-header {
+  position: relative;
+  padding: 0 5px 5px; /* 减小内边距 */
+  margin-bottom: 5px; /* 进一步减小底部间距 */
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.recommendation-header h2 {
+  font-size: 16px; /* 调整字体大小 */
+  font-weight: 600;
+  margin: 0 0 10px; /* 调整底部间距 */
+  color: #333;
+  position: relative;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.recommendation-header h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 14px;
+  background: #333;
+  border-radius: 1.5px;
+}
+
+/* 改进的推荐分类选择器 */
+.recommendation-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* 调整间距 */
+  margin-bottom: 5px; /* 进一步减小底部间距 */
+  width: 100%;
+  position: relative;
+  overflow-x: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  padding: 2px 0 3px;
+}
+
+.recommendation-categories::-webkit-scrollbar {
+  display: none;
+}
+
+/* 重新设计分类按钮 */
+.recommendation-category {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin-right: 5px;
+  margin-bottom: 5px;
+  transition: all 0.25s ease;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #555;
+}
+
+.recommendation-category:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.recommendation-category.active {
+  background-color: #333;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* 分类图标 */
+.category-icon {
+  font-size: 10px; /* 减小图标大小 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 分类名称 */
+.category-name {
+  font-weight: 500;
+  font-size: 11px; /* 减小字体大小 */
+}
+
+/* 激活状态下的图标和名称 */
+.recommendation-category.active .category-icon,
+.recommendation-category.active .category-name {
+  color: white;
+}
+
+/* 推荐产品容器 */
+.recommended-products-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+/* 推荐产品列表 - 优化网格布局以适应更宽的区域 */
+.recommended-products-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 减小最小列宽 */
+  gap: 10px; /* 减小间距 */
+  padding: 5px;
+  overflow-y: auto; /* 纵向滚动 */
+  max-height: 500px; /* 减小最大高度 */
+  transition: opacity 0.3s ease;
+  -webkit-animation: fadeIn 0.4s ease-in-out;
+  -moz-animation: fadeIn 0.4s ease-in-out;
+  -ms-animation: fadeIn 0.4s ease-in-out;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.recommendation-main .recommended-products-list {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 保持列宽一致 */
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-ms-keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recommended-products-list::-webkit-scrollbar {
+  width: 3px; /* 减小滚动条宽度 */
+}
+
+.recommended-products-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.recommended-products-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.recommended-products-list::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* 推荐产品项目 */
+.recommended-product-item {
+  min-width: auto;
+  width: 100%;
+  border-radius: 6px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 260px; /* 减小最小高度 */
+}
+
+.recommended-product-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #e8e8e8;
+}
+
+/* 产品图片容器 */
+.product-image-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%; /* 减小为75%,创建3:4比例容器 */
+  overflow: hidden;
+  background-color: #f5f5f5;
+}
+
+/* 产品图片 */
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 保持图片比例 */
+  object-position: center; /* 居中显示 */
+  transition: transform 0.3s ease;
+  opacity: 0;
+  padding: 10px; /* 减小内边距 */
+  box-sizing: border-box;
+}
+
+.product-image.loaded {
+  opacity: 1;
+}
+
+/* 添加图片hover效果 */
+.recommended-product-item:hover .product-image.loaded {
+  transform: scale(1.05);
+}
+
+/* 产品图片骨架屏 */
+.product-image-skeleton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  -webkit-animation: shimmer 1.5s infinite;
+  -moz-animation: shimmer 1.5s infinite;
+  -ms-animation: shimmer 1.5s infinite;
+  animation: shimmer 1.5s infinite;
+  z-index: 1;
+  border-radius: 4px;
+}
+
+@-webkit-keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@-moz-keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@-ms-keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 推荐产品信息 */
+.recommended-product-info {
+  padding: 8px 10px; /* 减小内边距 */
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 推荐产品标题 */
+.recommended-product-title {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 0 6px; /* 减小底部间距 */
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* 添加标准属性 */
+  -moz-line-clamp: 2; /* 添加Mozilla前缀 */
+  -ms-line-clamp: 2; /* 添加Microsoft前缀 */
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  min-height: 2.6em; /* 略微减小最小高度 */
+  max-height: 2.6em; /* 减小最大高度 */
+}
+
+/* 价格和评分容器 */
+.recommended-product-price-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* 推到底部 */
+  height: 20px; /* 固定高度 */
+}
+
+/* 产品价格 */
+.recommended-product-price {
+  font-size: 15px; /* 增大价格字体 */
+  font-weight: 600;
+  color: #e53935;
+  margin: 0;
+  line-height: 1; /* 调整行高保证垂直居中 */
+}
+
+/* 产品评分 */
+.recommended-product-rating {
+  display: flex;
+  align-items: center;
+  font-size: 11px; /* 增大字体大小 */
+}
+
+.rating-stars {
+  color: #ffc107;
+  margin-right: 3px; /* 增加右边距 */
+  letter-spacing: -1px; /* 让星星更紧凑 */
+}
+
+.star {
+  margin-right: -1px; /* 调整星星间距 */
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.star:not(.filled) {
+  color: #e0e0e0;
+}
+
+.rating-count {
+  color: #666; /* 更深的颜色使其更醒目 */
+  font-size: 10px; /* 稍微增大字体 */
+}
+
+/* 折扣信息 */
+.recommended-product-discount {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* 减小间距 */
+}
+
+.discount-badge {
+  background-color: #e53935;
+  color: white;
+  font-size: 8px; /* 减小字体大小 */
+  padding: 1px 3px; /* 减小内边距 */
+  border-radius: 2px; /* 减小圆角 */
+  font-weight: 600;
+}
+
+.original-price {
+  font-size: 10px; /* 减小字体大小 */
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* 折扣信息 */
+.discount-badge-corner {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #e53935;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+/* 加载状态 */
+.recommendation-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+  width: 100%;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #333;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  -moz-animation: spin 1s ease-in-out infinite;
+  -ms-animation: spin 1s ease-in-out infinite;
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 15px;
+}
+
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.recommendation-loading p {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* 无推荐状态 */
+.no-recommendations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.no-recommendations p {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 15px;
+}
+
+.view-all-products-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-all-products-btn:hover {
+  background-color: #555;
+}
+
+/* 右侧布局时的响应式调整 */
+@media (max-width: 1200px) {
+  .recommended-products-list {
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  }
+  
+  .recommended-product-item {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 992px) {
+  .recommended-products-list {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    max-height: none;
+    overflow-y: visible;
+  }
+  
+  .recommended-product-item {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .recommended-products-list {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+  
+  .recommended-product-item {
+    min-height: 230px;
+  }
+}
+
+@media (max-width: 576px) {
+  .recommended-products-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .recommended-product-item {
+    min-height: 220px;
+  }
+}
+
+/* AI推荐相关样式 */
+.ai-recommend-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #0077ff;
+  color: white;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  z-index: 5;
+  box-shadow: 0 1px 4px rgba(0, 123, 255, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.ai-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  color: #0077ff;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.ai-recommend-reason {
+  font-size: 11px;
+  color: #555;
+  margin: 0 0 6px;
+  font-style: italic;
+  background-color: #f7faff;
+  padding: 6px 8px;
+  border-radius: 3px;
+  border-left: 2px solid #0077ff;
+  height: 36px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* 添加标准属性 */
+  -moz-line-clamp: 2; /* 添加Mozilla前缀 */
+  -ms-line-clamp: 2; /* 添加Microsoft前缀 */
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+}
+
+/* AI推荐分类样式简化 */
+.recommendation-category[data-ai="true"] {
+  background: #f2f7ff;
+  color: #0077ff;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0, 123, 255, 0.12);
+}
+
+.recommendation-category[data-ai="true"]:hover {
+  background: #e6f0ff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.15);
+}
+
+.recommendation-category[data-ai="true"].active {
+  background: #0077ff;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+/* 错误状态 */
+.recommendation-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0; /* 减小内边距 */
+  width: 100%;
+  background-color: #fff8f8;
+  border-radius: 8px;
+}
+
+.error-icon {
+  width: 36px; /* 减小错误图标大小 */
+  height: 36px;
+  border-radius: 50%;
+  background-color: #e53935;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.recommendation-error p {
+  font-size: 13px;
+  color: #e53935;
+  margin: 0 0 12px;
+  text-align: center;
+}
+
+.retry-button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 14px; /* 调整按钮大小 */
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.retry-button:hover {
+  background-color: #c62828;
+}
+
+/* 调整热门推荐标签的样式 */
+.recommendation-category:first-child {
+  background-color: #fff0f0;
+  color: #e53935;
+  border: 1px solid rgba(229, 57, 53, 0.2);
+}
+
+.recommendation-category:first-child.active {
+  background-color: #e53935;
+  color: white;
+  border: 1px solid #e53935;
+}
+
+/* 让新品上市突出显示 */
+.recommendation-category:nth-child(2) {
+  background-color: #fff8e1;
+  color: #ff9800;
+  border: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.recommendation-category:nth-child(2).active {
+  background-color: #ff9800;
+  color: white;
+  border: 1px solid #ff9800;
+}
+
+/* 产品标签 */
+.product-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.product-tag.new {
+  background-color: #4caf50;
+}
+
+.product-tag.hot {
+  background-color: #f44336;
+}
+
+.product-tag.premium {
+  background-color: #9c27b0;
+}
+
+.product-tag.trending {
+  background-color: #2196f3;
+} 

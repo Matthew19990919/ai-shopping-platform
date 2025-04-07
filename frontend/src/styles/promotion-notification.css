@@ -1,0 +1,677 @@
+/* 促销通知样式 */
+.promotion-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  max-width: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.5s forwards;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+/* 优惠券弹窗容器样式 */
+.promotion-notification-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 320px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.promotion-notification-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.promotion-notification {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.promotion-notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background-color: #e1251b;
+  color: white;
+}
+
+.promotion-notification-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.promotion-notification-close {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+
+.promotion-notification-content {
+  padding: 15px;
+}
+
+.promotion-notification-text {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.promotion-notification-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.promotion-action-primary {
+  flex: 1;
+  padding: 8px 0;
+  background-color: #e1251b;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.promotion-action-secondary {
+  flex: 1;
+  padding: 8px 0;
+  background-color: #f5f5f5;
+  color: #666;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.promotion-notification.hide {
+  animation: slideOut 0.5s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.promotion-header {
+  padding: 12px 15px;
+  background-color: #e1251b;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.promotion-header-title {
+  font-size: 14px;
+}
+
+.promotion-close {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.promotion-content {
+  padding: 15px;
+}
+
+.promotion-title {
+  font-size: 14px;
+  margin: 0 0 10px;
+  font-weight: bold;
+}
+
+.promotion-description {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 10px;
+}
+
+.promotion-countdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.promotion-countdown-text {
+  font-size: 12px;
+  color: #999;
+}
+
+.promotion-countdown-timer {
+  font-size: 14px;
+  font-weight: bold;
+  color: #e1251b;
+}
+
+.promotion-button {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  background-color: #e1251b;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.promotion-button:hover {
+  background-color: #c1272d;
+}
+
+/* 响应式设计 */
+@media (max-width: 576px) {
+  .promotion-notification {
+    left: 10px;
+    right: 10px;
+    max-width: none;
+  }
+}
+
+.promotion-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  margin-top: 10px;
+  animation: slideUp 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.promotion-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.promotion-card-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.promotion-card-close {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: #999;
+}
+
+.promotion-card-content {
+  display: flex;
+  align-items: center;
+}
+
+.promotion-card-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.promotion-card-details {
+  flex: 1;
+}
+
+.promotion-card-description {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.promotion-card-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.promotion-card-current-price {
+  font-size: 16px;
+  color: #e1251b;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.promotion-card-original-price {
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.promotion-card-action {
+  background-color: #e1251b;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.promotion-card-progress {
+  height: 4px;
+  background-color: #f5f5f5;
+  border-radius: 2px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.promotion-card-progress-bar {
+  height: 100%;
+  background-color: #e1251b;
+  width: 0;
+  transition: width 0.1s linear;
+}
+
+/* 促销通知组件的样式 */
+
+/* 公告栏 */
+.announcement-bar {
+  width: 100%;
+  height: 32px;
+  background-color: #fffbe5;
+  color: #e1251b;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  border-bottom: 1px solid #ffe3e3;
+}
+
+.announcement-content {
+  display: inline-block;
+  padding: 0 10px;
+  line-height: 32px;
+  font-size: 12px;
+}
+
+.announcement-item {
+  display: inline-block;
+  padding: 0 15px;
+  position: relative;
+}
+
+.announcement-item:not(:last-child):after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #e1251b;
+}
+
+/* 促销轮播 */
+.banner {
+  margin-bottom: 20px;
+}
+
+.promotion-carousel {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+  width: 20px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+.carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-control.prev {
+  left: 15px;
+}
+
+.carousel-control.next {
+  right: 15px;
+}
+
+/* 促销类型样式 */
+.promotion-item.discount {
+  background-color: #ff5722;
+}
+
+.promotion-item.free-shipping {
+  background-color: #4caf50;
+}
+
+.promotion-item.flash-sale {
+  background-color: #f44336;
+}
+
+/* 促销弹窗 */
+#promotion-popup-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.promotion-popup {
+  width: 320px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-top: 15px;
+}
+
+.promotion-popup-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.promotion-popup-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.close-promotion {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.promotion-popup-body {
+  padding: 15px;
+}
+
+.promotion-popup-body p {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.promotion-image {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* 优惠券弹窗图片样式 */
+.promotion-notification-image {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.promotion-notification-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.promotion-popup .promotion-code {
+  background-color: #f5f5f5;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.copy-code {
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.promotion-popup-footer {
+  padding: 0 15px 15px 15px;
+  text-align: center;
+}
+
+.promotion-popup .promotion-button {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #1890ff;
+  color: white;
+}
+
+/* 弹窗类型样式 */
+.promotion-popup.flash-deal .promotion-popup-header {
+  background-color: #f44336;
+  color: white;
+}
+
+.promotion-popup.new-arrival .promotion-popup-header {
+  background-color: #2196f3;
+  color: white;
+}
+
+.promotion-popup.membership .promotion-popup-header {
+  background-color: #673ab7;
+  color: white;
+}
+
+.promotion-popup.flash-deal .promotion-popup-header h3,
+.promotion-popup.new-arrival .promotion-popup-header h3,
+.promotion-popup.membership .promotion-popup-header h3 {
+  color: white;
+}
+
+/* 弹窗动画 */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* 占位符 */
+.carousel-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f7fa;
+  color: #888;
+  font-size: 1rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .promotion-carousel {
+    height: 200px;
+  }
+  
+  .promotion-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .promotion-content p {
+    font-size: 1rem;
+  }
+  
+  #promotion-popup-container {
+    left: 20px;
+    right: 20px;
+  }
+  
+  .promotion-popup {
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .promotion-carousel {
+    height: 180px;
+  }
+  
+  .promotion-content h3 {
+    font-size: 1.3rem;
+  }
+} 

@@ -1,0 +1,297 @@
+.user-info-container {
+  padding: 10px 0;
+  width: 100%;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.section-header h2 {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+  font-weight: 500;
+}
+
+.edit-button {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer !important;
+  color: #666;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 100;
+  pointer-events: auto !important;
+}
+
+.edit-button:hover {
+  color: #e1251b;
+  border-color: #e1251b;
+  background-color: #fff0f0;
+}
+
+.edit-button svg {
+  margin-right: 6px;
+}
+
+/* 消息框 */
+.message-box {
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.message-box.success {
+  background-color: #f0f9eb;
+  color: #67c23a;
+  border: 1px solid #e1f3d8;
+}
+
+.message-box.error {
+  background-color: #fef0f0;
+  color: #f56c6c;
+  border: 1px solid #fde2e2;
+}
+
+/* 内容区域 */
+.user-info-content {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+/* 头像区域 */
+.user-avatar-section {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.large-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.large-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-edit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.large-avatar:hover .avatar-edit-overlay {
+  opacity: 1;
+}
+
+.avatar-edit-button {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+}
+
+.avatar-edit-button svg {
+  font-size: 16px;
+}
+
+.user-display-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin: 0 0 5px;
+}
+
+.user-join-date {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+/* 详细信息区域 */
+.user-details-section {
+  flex: 1;
+}
+
+.info-group {
+  margin-bottom: 25px;
+}
+
+.group-title {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  margin: 0 0 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.form-group label svg {
+  margin-right: 8px;
+  width: 14px;
+  color: #999;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #333;
+  padding: 6px 0;
+}
+
+.bio-text {
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.form-group input, 
+.form-group textarea {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+  border-color: #e1251b;
+}
+
+/* 性别选择器样式 */
+.gender-options {
+  display: flex;
+  gap: 15px;
+}
+
+.gender-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gender-option:hover {
+  border-color: #e1251b;
+}
+
+.gender-option.selected {
+  background-color: #fff0f0;
+  border-color: #e1251b;
+  color: #e1251b;
+}
+
+/* 表单按钮 */
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.save-button {
+  border: none;
+  border-radius: 4px;
+  padding: 8px 25px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.cancel-button {
+  background-color: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.cancel-button:hover {
+  background-color: #eee;
+}
+
+.save-button {
+  background-color: #e1251b;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #c01e19;
+}
+
+.cancel-button:disabled,
+.save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .user-info-content {
+    flex-direction: column;
+  }
+  
+  .user-avatar-section {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+} 

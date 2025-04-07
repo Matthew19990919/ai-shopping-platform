@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#9fd8f6"/>
+  <text 
+    x="50%" 
+    y="50%" 
+    font-family="Arial, sans-serif" 
+    font-size="16px" 
+    fill="#fff" 
+    text-anchor="middle" 
+    dominant-baseline="middle"
+  >
+    电
+  </text>
+  <rect width="100%" height="1" fill="#ddd" y="0"/>
+  <rect width="100%" height="1" fill="#ddd" y="49"/>
+  <rect width="1" height="100%" fill="#ddd" x="0"/>
+  <rect width="1" height="100%" fill="#ddd" x="49"/>
+</svg>

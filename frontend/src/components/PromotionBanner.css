@@ -1,0 +1,283 @@
+.promotion-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-radius: var(--border-radius-md);
+  margin: 16px 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--box-shadow-sm);
+  transition: all var(--transition-normal);
+  animation: slideInDown 0.5s ease forwards;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.promotion-banner-fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    max-height: 80px;
+  }
+  to {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.promotion-banner:hover {
+  box-shadow: var(--box-shadow-md);
+  transform: translateY(-2px);
+}
+
+.promotion-banner-primary {
+  background-color: var(--primary-light);
+  border-left: 4px solid var(--primary-color);
+}
+
+.promotion-banner-secondary {
+  background-color: var(--secondary-light);
+  border-left: 4px solid var(--secondary-color);
+}
+
+.promotion-banner-warning {
+  background-color: rgba(250, 173, 20, 0.1);
+  border-left: 4px solid var(--warning-color);
+}
+
+.promotion-banner-success {
+  background-color: rgba(82, 196, 26, 0.1);
+  border-left: 4px solid var(--success-color);
+}
+
+.promotion-banner-megaphone {
+  font-size: 20px;
+  margin-right: 20px;
+  color: var(--primary-color);
+  animation: pulse 2s infinite;
+}
+
+.promotion-banner-primary .promotion-banner-megaphone {
+  color: var(--primary-color);
+}
+
+.promotion-banner-secondary .promotion-banner-megaphone {
+  color: var(--secondary-color);
+}
+
+.promotion-banner-warning .promotion-banner-megaphone {
+  color: var(--warning-color);
+}
+
+.promotion-banner-success .promotion-banner-megaphone {
+  color: var(--success-color);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.promotion-banner-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.promotion-banner-icon {
+  margin-right: 12px;
+  font-size: 16px;
+}
+
+.promotion-banner-primary .promotion-banner-icon {
+  color: var(--primary-color);
+}
+
+.promotion-banner-secondary .promotion-banner-icon {
+  color: var(--secondary-color);
+}
+
+.promotion-banner-warning .promotion-banner-icon {
+  color: var(--warning-color);
+}
+
+.promotion-banner-success .promotion-banner-icon {
+  color: var(--success-color);
+}
+
+.promotion-banner-text {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: textSlideIn 0.5s ease forwards;
+}
+
+@keyframes textSlideIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.promotion-banner-primary .promotion-banner-text {
+  color: var(--text-primary);
+}
+
+.promotion-banner-secondary .promotion-banner-text {
+  color: var(--text-primary);
+}
+
+.promotion-banner-warning .promotion-banner-text {
+  color: var(--text-primary);
+}
+
+.promotion-banner-success .promotion-banner-text {
+  color: var(--text-primary);
+}
+
+.promotion-banner-controls {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.promotion-banner-nav-button {
+  background: none;
+  border: none;
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--border-radius-circle);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.promotion-banner-nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+.promotion-banner-indicators {
+  display: flex;
+  align-items: center;
+  margin: 0 8px;
+}
+
+.promotion-banner-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--border-radius-circle);
+  background-color: var(--text-tertiary);
+  margin: 0 3px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.promotion-banner-indicator.active {
+  width: 12px;
+  background-color: var(--primary-color);
+}
+
+.promotion-banner-primary .promotion-banner-indicator.active {
+  background-color: var(--primary-color);
+}
+
+.promotion-banner-secondary .promotion-banner-indicator.active {
+  background-color: var(--secondary-color);
+}
+
+.promotion-banner-warning .promotion-banner-indicator.active {
+  background-color: var(--warning-color);
+}
+
+.promotion-banner-success .promotion-banner-indicator.active {
+  background-color: var(--success-color);
+}
+
+.promotion-banner-close {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--border-radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all var(--transition-fast);
+}
+
+.promotion-banner-close:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+  .promotion-banner {
+    padding: 12px 16px;
+  }
+  
+  .promotion-banner-megaphone {
+    display: none;
+  }
+  
+  .promotion-banner-content {
+    width: 100%;
+  }
+  
+  .promotion-banner-text {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .promotion-banner-controls {
+    display: none;
+  }
+  
+  .promotion-banner-icon {
+    font-size: 14px;
+  }
+  
+  .promotion-banner-text {
+    font-size: 12px;
+  }
+} 

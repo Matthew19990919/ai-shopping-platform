@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="280" height="160" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f6ffed"/>
+  <text 
+    x="50%" 
+    y="50%" 
+    font-family="Arial, sans-serif" 
+    font-size="16px" 
+    fill="#52c41a" 
+    text-anchor="middle" 
+    dominant-baseline="middle"
+  >
+    促销活动
+  </text>
+  <rect width="100%" height="1" fill="#ddd" y="0"/>
+  <rect width="100%" height="1" fill="#ddd" y="159"/>
+  <rect width="1" height="100%" fill="#ddd" x="0"/>
+  <rect width="1" height="100%" fill="#ddd" x="279"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <style>
+    .text { font: bold 30px sans-serif; fill: #e1251b; }
+    .icon { fill: #e1251b; }
+  </style>
+  <rect class="icon" x="10" y="15" width="35" height="35" rx="5" />
+  <text class="text" x="55" y="40">AI购物</text>
+</svg> 

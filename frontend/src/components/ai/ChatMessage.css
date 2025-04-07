@@ -1,0 +1,1404 @@
+.chat-message {
+  display: flex;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-message {
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.assistant-message {
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+/* 通用头像样式 */
+.message-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+/* 只需保留助手头像的边距设置 */
+.assistant-message .message-avatar {
+  margin-right: 12px;
+  margin-left: 0;
+}
+
+/* 更精确的头像样式覆盖 */
+.assistant-avatar {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+  font-size: 18px !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+  background-color: #4a90e2 !important;
+}
+
+/* 确保图标大小一致 */
+.assistant-avatar svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* 清除可能的背景色冲突 */
+.assistant-message .message-avatar {
+  background-color: transparent !important;
+}
+
+.message-content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-message .message-content-wrapper {
+  align-items: flex-end;
+}
+
+.assistant-message .message-content-wrapper {
+  align-items: flex-start;
+}
+
+.message-content {
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+}
+
+.user-message .message-content {
+  background-color: #e8f0fe;
+  color: #202124;
+  border-bottom-right-radius: 4px;
+}
+
+.assistant-message .message-content {
+  background-color: #f8f9fa;
+  color: #202124;
+  border-bottom-left-radius: 4px;
+}
+
+.message-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.message-text h1,
+.message-text h2,
+.message-text h3,
+.message-text h4,
+.message-text h5,
+.message-text h6 {
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+  color: #2c3e50;
+}
+
+.message-text h1 {
+  font-size: 1.5em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.3em;
+}
+
+.message-text h2 {
+  font-size: 1.3em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.3em;
+}
+
+.message-text h3 {
+  font-size: 1.2em;
+}
+
+.message-text ul, 
+.message-text ol {
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.message-text li {
+  margin-bottom: 0.5em;
+}
+
+.message-text p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+.message-text code {
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  font-family: monospace;
+  padding: 2px 4px;
+  color: #e74c3c;
+}
+
+.message-text pre {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 1em;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+
+.message-text blockquote {
+  border-left: 4px solid #ddd;
+  padding-left: 1em;
+  color: #666;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.message-text a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.message-text a:hover {
+  text-decoration: underline;
+}
+
+.message-text img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 1em 0;
+}
+
+/* 表格样式 */
+.markdown-table-container {
+  margin: 16px 0 !important;
+  overflow-x: auto !important;
+  background: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  animation: slideIn 0.4s ease !important;
+  max-width: 100% !important;
+  display: block !important;
+  width: 100% !important;
+  max-height: none !important;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.markdown-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 13px !important;
+  table-layout: auto !important;
+  border: none !important;
+}
+
+.markdown-table th {
+  background-color: #f8f9fa !important;
+  padding: 10px 16px !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+  color: #202124 !important;
+  border-bottom: 2px solid #e8eaed !important;
+  white-space: normal !important;
+  min-width: 120px !important;
+}
+
+.markdown-table td {
+  padding: 10px 16px !important;
+  border-bottom: 1px solid #e8eaed !important;
+  color: #5f6368 !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  min-width: 120px !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+.markdown-table tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.markdown-table tr:hover {
+  background-color: #f1f3f4;
+}
+
+.markdown-table-error {
+  color: #d93025 !important;
+  padding: 10px !important;
+  text-align: center !important;
+  font-style: italic !important;
+  background-color: #feeae9 !important;
+  border-radius: 8px !important;
+  margin: 16px 0 !important;
+  border: 1px solid #fad2d0 !important;
+}
+
+.markdown-table-warning {
+  color: #e37400 !important;
+  padding: 8px 16px !important;
+  text-align: center !important;
+  font-style: italic !important;
+  background-color: #fff8e1 !important;
+  border-radius: 8px 8px 0 0 !important;
+  border-bottom: 1px solid #ffecc7 !important;
+  font-size: 12px !important;
+}
+
+/* 价格分析图表容器 */
+.price-analysis-container {
+  margin-top: 20px;
+  border: 1px solid #e8eaf6;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.price-analysis-title {
+  background-color: #f5f7ff;
+  padding: 10px 15px;
+  margin: 0;
+  font-size: 16px;
+  color: #4568dc;
+  border-bottom: 1px solid #e8eaf6;
+}
+
+.price-analysis {
+  padding: 15px;
+}
+
+.price-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.price-info-item {
+  flex: 1;
+  min-width: 100px;
+  background-color: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #666;
+  margin-right: 4px;
+}
+
+.info-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.price-chart-container {
+  margin: 15px 0;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.price-analysis-summary {
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.trend {
+  font-weight: 600;
+}
+
+.trend-up {
+  color: #f44336;
+}
+
+.trend-down {
+  color: #4caf50;
+}
+
+.trend-stable {
+  color: #ff9800;
+}
+
+.evaluation {
+  margin-top: 5px;
+  padding: 8px 12px;
+  background-color: #fffde7;
+  border-left: 3px solid #ffd600;
+  border-radius: 4px;
+}
+
+.price-tooltip {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-date {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 4px;
+}
+
+.tooltip-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e53935;
+  margin: 0;
+}
+
+.price-analysis-empty {
+  padding: 20px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+/* 产品卡片容器 */
+.product-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+  width: 100%;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.product-card.selected {
+  border: 2px solid #4568dc;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.product-image-container {
+  position: relative;
+  padding-top: 75%;
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-info {
+  padding: 12px;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: #333;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-brand {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.product-stars {
+  color: #f5a623;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.product-review-count {
+  font-size: 12px;
+  color: #888;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e53935;
+  margin-bottom: 8px;
+}
+
+.product-description {
+  font-size: 12px;
+  color: #666;
+  margin-top: 8px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 产品比较表格样式 */
+.product-comparison-container {
+  margin: 20px 0;
+  border: 1px solid #e8eaf6;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-title {
+  background-color: #f5f7ff;
+  padding: 10px 15px;
+  margin: 0;
+  font-size: 16px;
+  color: #4568dc;
+  border-bottom: 1px solid #e8eaf6;
+}
+
+.comparison-products {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.comparison-product {
+  text-align: center;
+  width: 120px;
+}
+
+.comparison-product-image {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 10px;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.comparison-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.comparison-product-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.comparison-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+
+.comparison-attribute {
+  font-weight: 600;
+  color: #333;
+  width: 100px;
+}
+
+.comparison-value {
+  color: #555;
+}
+
+.comparison-conclusion {
+  padding: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f5f7ff;
+  border-top: 1px solid #e8eaf6;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .message-content-wrapper {
+    max-width: 80%;
+  }
+  
+  .markdown-table-container {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  .markdown-table th,
+  .markdown-table td {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    min-width: 100px !important;
+  }
+}
+
+.message-timestamp {
+  font-size: 11px;
+  color: #9aa0a6;
+  margin-top: 4px;
+}
+
+.user-message .message-timestamp {
+  text-align: right;
+  margin-right: 8px;
+}
+
+.assistant-message .message-timestamp {
+  margin-left: 8px;
+}
+
+/* 产品展示区域的通用样式 */
+.product-recommendation-section,
+.product-comparison-section,
+.price-analysis-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eaeaea;
+  width: 100%;
+}
+
+/* 对Markdown内容的样式调整 */
+.message-content p {
+  margin: 0.5rem 0;
+}
+
+.message-content ul {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.message-content ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.message-content pre {
+  background-color: #f5f5f5;
+  padding: 0.75rem;
+  border-radius: 4px;
+  overflow: auto;
+  margin: 0.5rem 0;
+}
+
+.message-content code {
+  font-family: monospace;
+  background-color: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.message-content blockquote {
+  border-left: 4px solid var(--primary-color);
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.assistant-message .message-text strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.assistant-message .message-text em {
+  font-style: italic;
+  color: #555;
+}
+
+/* 图片消息样式 */
+.message-image-content {
+  margin: 8px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.uploaded-image {
+  display: block;
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.image-filename {
+  font-size: 12px;
+  color: #666;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* 图片预览容器 */
+.uploaded-image-preview {
+  margin: 10px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+}
+
+.uploaded-image-preview img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.image-caption {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #666;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* 消息中同时包含文本和图片时的布局 */
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 确保多媒体内容自适应消息容器宽度 */
+.message-text + .message-image-content {
+  margin-top: 10px;
+}
+
+/* 价格比较页面样式 */
+.price-comparison-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.price-comparison-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.price-comparison-title {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.price-comparison-title svg {
+  margin-right: 10px;
+  color: #1890ff;
+}
+
+.price-comparison-subtitle {
+  color: #666;
+  margin-top: 5px;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  outline: none;
+}
+
+.search-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #1890ff;
+  font-size: 20px;
+}
+
+.price-comparison-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+  color: #666;
+}
+
+.price-comparison-loading .ant-spin {
+  margin-bottom: 20px;
+}
+
+/* 平台价格比较表样式 */
+.platform-price-comparison {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.comparison-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-wrap: wrap;
+}
+
+.comparison-title {
+  font-size: 18px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.comparison-title svg {
+  margin-right: 10px;
+  color: #faad14;
+}
+
+.price-statistics {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.stats-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.stats-label svg {
+  margin-right: 5px;
+  font-size: 10px;
+}
+
+.stats-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.lowest-price {
+  color: #f5222d;
+}
+
+.highest-price {
+  color: #fa8c16;
+}
+
+.price-diff {
+  color: #722ed1;
+}
+
+.platform-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.platform-name {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.platform-cell .ant-tag {
+  margin-right: 0;
+}
+
+.product-info-cell {
+  display: flex;
+  align-items: center;
+}
+
+.product-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.product-meta {
+  display: flex;
+  gap: 15px;
+  color: #666;
+  font-size: 12px;
+}
+
+.price-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f5222d;
+  margin-bottom: 2px;
+}
+
+.original-price {
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through;
+  margin-bottom: 5px;
+}
+
+.discount-tag, .coupon-tag, .free-shipping-tag, .shipping-fee {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.discount-tag {
+  color: #f5222d;
+}
+
+.coupon-tag {
+  color: #fa8c16;
+}
+
+.free-shipping-tag {
+  color: #52c41a;
+}
+
+.shipping-fee {
+  color: #666;
+}
+
+.discount-tag svg, .coupon-tag svg, .free-shipping-tag svg, .shipping-fee svg {
+  margin-right: 5px;
+  font-size: 10px;
+}
+
+.price-history-btn {
+  margin-top: 5px;
+}
+
+.comparison-footer {
+  background-color: #f9f9f9;
+  padding: 15px 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.high-diff-tip, .low-diff-tip {
+  text-align: center;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.high-diff-tip {
+  color: #f5222d;
+}
+
+.low-diff-tip {
+  color: #52c41a;
+}
+
+.ai-recommendation {
+  display: flex;
+  align-items: center;
+  background-color: #e6f7ff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.ai-recommendation-icon {
+  color: #1890ff;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.ai-recommendation-text {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.price-history-modal-title {
+  display: flex;
+  align-items: center;
+}
+
+.modal-icon {
+  margin-right: 10px;
+  color: #1890ff;
+}
+
+.modal-product-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-product-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+.modal-product-details {
+  flex: 1;
+}
+
+.modal-product-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.modal-product-price {
+  margin-bottom: 5px;
+}
+
+.modal-product-price .current-price {
+  margin-right: 10px;
+}
+
+.modal-product-platform {
+  color: #666;
+  font-size: 14px;
+}
+
+.price-alert-success {
+  display: flex;
+  align-items: center;
+  background-color: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-top: 15px;
+  color: #52c41a;
+}
+
+.alert-icon {
+  margin-right: 10px;
+}
+
+.lowest-price-row {
+  background-color: #fff1f0;
+}
+
+.lowest-price-row:hover > td {
+  background-color: #ffccc7 !important;
+}
+
+/* 新增样式 - 价格比较视图切换 */
+.comparison-actions {
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.comparison-view-options {
+  display: flex;
+  gap: 10px;
+}
+
+.view-option {
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.view-option svg {
+  margin-right: 5px;
+}
+
+.view-option.active {
+  background-color: #1890ff;
+  color: white;
+}
+
+.platform-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.platform-toggle-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.platform-toggle-btn {
+  background-color: #f5f5f5;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.platform-toggle-btn.active {
+  background-color: #e6f7ff;
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.platform-toggle-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 新增样式 - 图表视图 */
+.price-chart-view {
+  padding: 20px;
+}
+
+.price-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.price-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.price-bar-label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.price-bar-container {
+  position: relative;
+  height: 25px;
+  width: 100%;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.price-bar-original {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #d9d9d9;
+  border-radius: 4px;
+}
+
+.price-bar-current {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #1890ff;
+  border-radius: 4px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.price-bar-discount {
+  font-size: 12px;
+  color: #f5222d;
+  display: flex;
+  align-items: center;
+}
+
+.price-bar-discount svg {
+  margin-right: 5px;
+  font-size: 10px;
+}
+
+/* 新增样式 - 价格竞争力 */
+.price-competitiveness {
+  margin-top: 8px;
+}
+
+.competitiveness-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+/* 新增样式 - 价格趋势切换按钮 */
+.trend-insights-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: none;
+  border-top: 1px dashed #d9d9d9;
+  border-bottom: 1px dashed #d9d9d9;
+  cursor: pointer;
+  color: #1890ff;
+  transition: all 0.3s;
+}
+
+.trend-insights-toggle:hover {
+  background-color: #e6f7ff;
+}
+
+/* 新增样式 - 价格预测 */
+.price-prediction-section {
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.prediction-title {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.prediction-title svg {
+  margin-right: 10px;
+  color: #1890ff;
+}
+
+.prediction-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.prediction-card {
+  flex: 1;
+  min-width: 150px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.prediction-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #1890ff;
+}
+
+.prediction-content {
+  flex: 1;
+}
+
+.prediction-content h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.prediction-content p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.trend-rising {
+  color: #f5222d;
+}
+
+.trend-falling {
+  color: #52c41a;
+}
+
+.high-volatility {
+  color: #fa8c16;
+}
+
+.confidence {
+  font-size: 12px;
+  color: #666;
+  font-weight: normal;
+  margin-left: 5px;
+}
+
+.prediction-summary {
+  background-color: #f0f7ff;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.prediction-summary svg {
+  color: #1890ff;
+  margin-right: 10px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.prediction-summary p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+  .comparison-header, .comparison-actions, .price-statistics {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .price-statistics {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .stats-item {
+    width: 100%;
+  }
+  
+  .prediction-cards {
+    flex-direction: column;
+  }
+  
+  .platform-toggle {
+    margin-top: 10px;
+  }
+} 

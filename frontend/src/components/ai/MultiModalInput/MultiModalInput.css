@@ -1,0 +1,251 @@
+/* 多模态输入组件样式 */
+
+/* 语音输入组件样式 */
+.voice-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.voice-control-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f5f7ff;
+  color: #4568dc;
+  border: 1px solid rgba(69, 104, 220, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-control-button:hover {
+  background-color: #eef0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(69, 104, 220, 0.15);
+}
+
+.voice-control-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.voice-control-button.recording {
+  background-color: #ff4d4f;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+.voice-control-button.processing {
+  background-color: #4568dc;
+  color: white;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(255, 77, 79, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 77, 79, 0);
+  }
+}
+
+.interim-result {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+  max-width: 250px;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+}
+
+.interim-icon {
+  color: #4568dc;
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+.recording-indicator {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  width: 140px;
+}
+
+.audio-visualizer {
+  width: 120px;
+  height: 40px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.recording-label {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+}
+
+.audio-error-message {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #f5222d;
+  max-width: 200px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+}
+
+.audio-error-message svg {
+  margin-right: 6px;
+}
+
+/* 图片输入组件样式 */
+.image-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.image-upload-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f5f7ff;
+  color: #4568dc;
+  border: 1px solid rgba(69, 104, 220, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.image-upload-button:hover {
+  background-color: #eef0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(69, 104, 220, 0.15);
+}
+
+.image-upload-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.image-upload-button.uploading {
+  background-color: #4568dc;
+  color: white;
+}
+
+.image-preview-container {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.image-preview {
+  max-width: 150px;
+  max-height: 100px;
+  border-radius: 4px;
+  display: block;
+}
+
+.clear-preview-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  cursor: pointer;
+  transform: translate(50%, -50%);
+}
+
+.clear-preview-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.upload-status {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #4568dc;
+  z-index: 5;
+}
+
+.image-error-message {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #f5222d;
+  max-width: 200px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+}
+
+.image-error-message svg {
+  margin-right: 6px;
+}

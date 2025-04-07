@@ -1,0 +1,191 @@
+.promotion-banner {
+  width: 100%;
+  background-color: #f8f3e8;
+  position: relative;
+  overflow: hidden;
+  height: 40px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.promotion-banner-fade-out {
+  opacity: 0;
+  height: 0;
+  margin-top: -40px;
+}
+
+.promotion-banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 15px;
+  position: relative;
+}
+
+.promotion-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 0 20px;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.promotion-banner-content:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.promotion-banner-icon {
+  margin-right: 12px;
+  font-size: 14px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promotion-banner-text {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 公告类型样式 */
+.promotion-banner-primary {
+  color: #1677ff;
+}
+
+.promotion-banner-secondary {
+  color: #722ed1;
+}
+
+.promotion-banner-warning {
+  color: #fa8c16;
+}
+
+.promotion-banner-success {
+  color: #52c41a;
+}
+
+/* 导航按钮样式 */
+.promotion-banner-nav {
+  background: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  color: #666;
+  padding: 0;
+  margin: 0;
+}
+
+.promotion-banner-nav:hover {
+  opacity: 1;
+}
+
+.promotion-banner-prev {
+  margin-right: 5px;
+}
+
+.promotion-banner-next {
+  margin-left: 5px;
+}
+
+/* 关闭按钮样式 */
+.promotion-banner-close {
+  background: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  color: #666;
+  position: absolute;
+  right: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.promotion-banner-close:hover {
+  opacity: 1;
+}
+
+/* 指示器样式 */
+.promotion-banner-indicators {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 10px;
+}
+
+.promotion-banner-indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.promotion-banner-indicator.active {
+  width: 12px;
+  border-radius: 2px;
+  background-color: currentColor;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+  .promotion-banner {
+    height: 36px;
+  }
+  
+  .promotion-banner-text {
+    font-size: 12px;
+  }
+  
+  .promotion-banner-indicators {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .promotion-banner-icon {
+    display: none;
+  }
+  
+  .promotion-banner-nav {
+    width: 20px;
+  }
+  
+  .promotion-banner-close {
+    width: 20px;
+  }
+} 

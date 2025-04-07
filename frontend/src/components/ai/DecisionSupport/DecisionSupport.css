@@ -1,0 +1,668 @@
+/* 决策支持组件样式 */
+.decision-support-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  margin: 15px 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.decision-support-container:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.decision-header {
+  padding: 20px;
+  background: linear-gradient(135deg, #4a5ae8, #5a6bff);
+  color: white;
+  cursor: pointer;
+}
+
+.decision-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.decision-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #ffeb3b;
+}
+
+.decision-title h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.decision-subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+.toggle-indicator {
+  font-size: 12px;
+  text-align: right;
+  opacity: 0.8;
+  margin-top: 5px;
+}
+
+.decision-summary {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+@media (min-width: 768px) {
+  .decision-summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 信心指示器样式 */
+.confidence-indicator {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #4CAF50;
+}
+
+.confidence-icon-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.confidence-icon {
+  font-size: 20px;
+  color: white;
+}
+
+.confidence-info {
+  flex: 1;
+}
+
+.confidence-text {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.confidence-score {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.confidence-description {
+  font-size: 12px;
+  color: #777;
+}
+
+/* 使用场景匹配样式 */
+.primary-usecase {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #42A5F5;
+}
+
+.usecase-icon {
+  font-size: 20px;
+  color: #42A5F5;
+  margin-right: 15px;
+}
+
+.usecase-info {
+  flex: 1;
+}
+
+.usecase-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.usecase-match {
+  font-size: 14px;
+  color: #555;
+}
+
+/* 价值观匹配样式 */
+.value-match {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #9C27B0;
+}
+
+.value-icon {
+  font-size: 20px;
+  color: #9C27B0;
+  margin-right: 15px;
+}
+
+.value-info {
+  flex: 1;
+}
+
+.value-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.value-score {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.value-details {
+  font-size: 12px;
+  color: #777;
+}
+
+/* 进度条样式 */
+.progress-bar-container {
+  height: 6px;
+  background-color: #e9ecef;
+  border-radius: 10px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+/* 详细分析部分 */
+.decision-details {
+  padding: 0 20px 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-section {
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.section-icon {
+  margin-right: 10px;
+  color: #5a6bff;
+}
+
+.detail-subtitle {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* 使用场景分析样式 */
+.strength-list, .limitation-list {
+  padding-left: 0;
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+
+.strength-item, .limitation-item {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.strength-icon, .limitation-icon {
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.strength-icon {
+  color: #4CAF50;
+}
+
+.limitation-icon {
+  color: #F44336;
+}
+
+/* 购后成本分析样式 */
+.cost-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.cost-item {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.cost-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.cost-value {
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+
+.cost-chart {
+  height: 25px;
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  margin-top: 10px;
+}
+
+.cost-bar {
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  transition: width 0.5s ease;
+  padding: 0 5px;
+}
+
+.cost-bar-label {
+  font-size: 10px;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.purchase {
+  background-color: #5a6bff;
+}
+
+.maintenance {
+  background-color: #FF9800;
+}
+
+.accessories {
+  background-color: #8BC34A;
+}
+
+.upgrade {
+  background-color: #9C27B0;
+}
+
+/* 社会证明样式 */
+.review-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .review-overview {
+    flex-direction: row;
+  }
+  
+  .review-rating, .review-keywords {
+    flex: 1;
+  }
+}
+
+.review-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rating-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.rating-stars {
+  margin-bottom: 5px;
+}
+
+.star-icon {
+  color: #FFD700;
+  margin: 0 2px;
+}
+
+.star-icon.empty {
+  color: #e0e0e0;
+}
+
+.rating-count {
+  font-size: 12px;
+  color: #888;
+}
+
+.review-keywords {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.keyword-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.keyword-tag {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+
+.keyword-tag.positive {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+}
+
+.keyword-tag.negative {
+  background-color: #FFEBEE;
+  color: #C62828;
+}
+
+.keyword-count {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-left: 4px;
+}
+
+.recent-reviews {
+  margin-top: 20px;
+}
+
+.review-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+}
+
+.review-date {
+  font-size: 11px;
+  color: #888;
+}
+
+.review-rating-mini {
+  margin-left: auto;
+}
+
+.mini-star {
+  font-size: 11px;
+  color: #FFD700;
+}
+
+.mini-star.empty {
+  color: #e0e0e0;
+}
+
+.review-comment {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* 价值观匹配分析样式 */
+.value-alignment-details {
+  margin-bottom: 15px;
+}
+
+.value-factor {
+  margin-bottom: 15px;
+}
+
+.factor-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.factor-bars {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.factor-importance, .factor-score {
+  display: flex;
+  flex-direction: column;
+}
+
+.bar-label {
+  font-size: 11px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.factor-bar-container {
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.factor-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.importance-bar {
+  background-color: #5C6BC0;
+}
+
+.score-bar {
+  background-color: #26A69A;
+}
+
+.value-conclusion {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.value-recommendation {
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+}
+
+.positive-match {
+  color: #2E7D32;
+}
+
+.moderate-match {
+  color: #F57C00;
+}
+
+.low-match {
+  color: #C62828;
+}
+
+.value-recommendation svg {
+  margin-right: 5px;
+}
+
+/* 最终建议样式 */
+.final-recommendation {
+  background: linear-gradient(135deg, #4a5ae8, #5a6bff);
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  margin-top: 25px;
+  box-shadow: 0 4px 15px rgba(90, 107, 255, 0.2);
+}
+
+.recommendation-title {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.recommendation-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.recommendation-content {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.recommendation-text {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .decision-support-container {
+    background-color: #2d2d2d;
+  }
+  
+  .decision-header {
+    background: linear-gradient(135deg, #3a4ad8, #4a5bef);
+  }
+  
+  .confidence-indicator,
+  .primary-usecase,
+  .value-match,
+  .detail-section {
+    background-color: #3d3d3d;
+  }
+  
+  .cost-item,
+  .review-rating,
+  .review-keywords,
+  .review-item,
+  .value-conclusion {
+    background-color: #333;
+    color: #e0e0e0;
+  }
+  
+  .confidence-text,
+  .usecase-title,
+  .value-title,
+  .section-title,
+  .factor-name {
+    color: #e0e0e0;
+  }
+  
+  .confidence-score,
+  .confidence-description,
+  .usecase-match,
+  .value-score,
+  .value-details,
+  .detail-subtitle,
+  .cost-label,
+  .review-comment {
+    color: #bbb;
+  }
+  
+  .cost-value,
+  .reviewer-name {
+    color: #e0e0e0;
+  }
+  
+  .rating-number {
+    color: #e0e0e0;
+  }
+  
+  .progress-bar-container,
+  .factor-bar-container,
+  .cost-chart {
+    background-color: #555;
+  }
+  
+  .keyword-tag.positive {
+    background-color: #1B5E20;
+    color: #A5D6A7;
+  }
+  
+  .keyword-tag.negative {
+    background-color: #B71C1C;
+    color: #FFCDD2;
+  }
+}

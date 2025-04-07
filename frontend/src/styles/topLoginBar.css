@@ -1,0 +1,147 @@
+/* 展开状态的顶部栏 */
+.topbar-expanded-state {
+  width: 100%;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #e6e6e6;
+  position: relative;
+  z-index: 1001;
+}
+
+/* 收起状态的顶部栏 */
+.topbar-collapsed-state {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  height: 0;
+  z-index: 1001;
+}
+
+/* 顶部登录栏 */
+.top-login-bar {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 展开顶栏按钮 */
+.topbar-expand-button {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f2f2f2;
+  border: 1px solid #e6e6e6;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  z-index: 1002;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.topbar-expand-button:hover {
+  background-color: #e1251b;
+  color: white;
+}
+
+/* 收起顶栏按钮 */
+.topbar-collapse-button {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.topbar-collapse-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #e1251b;
+}
+
+/* 登录注册按钮 */
+.login-register-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.greeting-text {
+  color: #333;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.login-btn, .register-btn {
+  padding: 5px 15px;
+  margin: 0 5px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.login-btn {
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.login-btn:hover {
+  border-color: #e1251b;
+  color: #e1251b;
+}
+
+.register-btn {
+  background-color: #e1251b;
+  color: white;
+  border: 1px solid #e1251b;
+}
+
+.register-btn:hover {
+  background-color: #c1272d;
+  border-color: #c1272d;
+}
+
+.welcome-message {
+  color: #333;
+  font-size: 14px;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+  .top-login-bar {
+    padding: 8px 10px;
+  }
+  
+  .login-btn, .register-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+  
+  .greeting-text {
+    font-size: 12px;
+  }
+  
+  .topbar-expand-button {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+} 

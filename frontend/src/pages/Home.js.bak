@@ -1,0 +1,1004 @@
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faUser, 
+  faHeart, 
+  faShoppingCart, 
+  faTag, 
+  faComments, 
+  faPercent, 
+  faQuestion, 
+  faGift, 
+  faHeadset,
+  faArrowRight,
+  faFire,
+  faBolt,
+  faChevronRight,
+  faClock,
+  faStar,
+  faShoppingBag,
+  faTags,
+  faBoxOpen,
+  faCalendarAlt,
+  faRobot
+} from '@fortawesome/free-solid-svg-icons';
+
+// 导入导航栏组件
+import Navbar from '../components/Navbar';
+import ProductRecommendations from '../components/ProductRecommendations';
+// 导入公告横幅组件
+import PromotionBanner from '../components/PromotionBanner';
+import Footer from '../components/Footer';
+// 导入AI助手组件
+import ChatInterface from '../components/ai/ChatInterface';
+// 导入全部服务方法
+import * as RecommendationService from '../services/recommendationService';
+// 导入AI服务
+import { streamEnhancedMessageToAI } from '../services/enhancedAiService';
+// 导入图片服务
+import { getPromotionImageUrl, getBannerImages, handleImageError } from '../services/imageService';
+// 导入AI导购助手服务
+import * as AiShoppingAssistant from '../services/aiShoppingAssistant';
+
+// 导入CSS样式
+import '../styles/home.css';
+import '../styles/real-time-updates.css';
+import '../styles/user-personalization.css';
+import '../styles/promotion-notification.css';
+import '../styles/ai-assistant.css';
+import '../styles/promotions-home.css';
+// 导入布局修复CSS
+import '../styles/home-layout-fix.css';
+
+const Home = () => {
+  const [activeRecommendationType, setActiveRecommendationType] = useState('personalized');
+  const [banners, setBanners] = useState([]);
+  const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState([
+    { id: 1, name: '家用电器', icon: 'tv', color: '#e67e22', path: '/category/electronics' },
+    { id: 2, name: '手机数码', icon: 'mobile', color: '#3498db', path: '/category/phones' },
+    { id: 3, name: '电脑办公', icon: 'laptop', color: '#2ecc71', path: '/category/computers' },
+    { id: 4, name: '家居家具', icon: 'couch', color: '#e74c3c', path: '/category/home' },
+    { id: 5, name: '服装鞋帽', icon: 'tshirt', color: '#9b59b6', path: '/category/fashion' },
+    { id: 6, name: '美妆个护', icon: 'magic', color: '#f39c12', path: '/category/beauty' },
+    { id: 7, name: '食品生鲜', icon: 'apple-alt', color: '#27ae60', path: '/category/food' },
+    { id: 8, name: '医药健康', icon: 'heartbeat', color: '#c0392b', path: '/category/health' }
+  ]);
+  
+  // 自定义促销公告数据
+  const homeAnnouncements = [
+    {
+      id: 1,
+      icon: faGift,
+      text: "新用户专享：注册即送50元优惠券礼包",
+      link: "/promotions/new-user",
+      type: "primary"
+    },
+    {
+      id: 2,
+      icon: faTags,
+      text: "618大促：全场商品低至5折，还有满300减50活动",
+      link: "/campaigns/618",
+      type: "secondary"
+    },
+    {
+      id: 3,
+      icon: faBolt,
+      text: "限时闪购：每日10点、22点准时开抢",
+      link: "/flash-sales",
+      type: "warning"
+    },
+    {
+      id: 4,
+      icon: faBoxOpen,
+      text: "AI导购功能全新上线：智能推荐，精准满足您的需求",
+      link: "/ai-assistant",
+      type: "success"
+    }
+  ];
+
+  // 添加AI助手状态
+  const [showAIAssistant, setShowAIAssistant] = useState(false);
+  const [aiMessages, setAiMessages] = useState([]);
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [streamingMessage, setStreamingMessage] = useState("");
+
+  useEffect(() => {
+    // 强制刷新CSS，使用更安全的方法
+    const refreshCSS = () => {
+      try {
+        const links = document.querySelectorAll('link[rel="stylesheet"]');
+        const timestamp = new Date().getTime();
+        
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && !href.includes('refresh=')) {
+            // 直接修改现有link的href，而不是创建新的
+            const newHref = href.includes('?') 
+              ? `${href}&refresh=${timestamp}` 
+              : `${href}?refresh=${timestamp}`;
+            link.setAttribute('href', newHref);
+          }
+        });
+        
+        console.log('CSS样式已刷新，时间戳:', timestamp);
+      } catch (error) {
+        console.error('刷新CSS时出错:', error);
+      }
+    };
+    
+    // 调用强制刷新CSS函数
+    refreshCSS();
+
+    // 初始化时设置加载状态
+    setIsLoading(true);
+
+    // 初始化页面时运行的代码
+    // 加载脚本
+    const loadScript = (src, callback) => {
+      // 检查脚本是否已存在
+      const existingScript = document.querySelector(`script[src="${src}"]`);
+      if (existingScript && callback) {
+        callback();
+        return;
+      }
+
+      // 创建新脚本
+      try {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        
+        // 添加回调
+        if (callback) {
+          script.onload = () => callback();
+        }
+        
+        document.body.appendChild(script);
+      } catch (error) {
+        console.error(`Error loading script: ${src}`, error);
+      }
+    };
+
+    // 清除浏览器缓存的CSS文件
+    const clearCSSCache = () => {
+      try {
+        const links = document.querySelectorAll('link[rel="stylesheet"]');
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href) {
+            const newHref = href.includes('?') 
+              ? `${href}&_cache=${new Date().getTime()}` 
+              : `${href}?_cache=${new Date().getTime()}`;
+            link.setAttribute('href', newHref);
+          }
+        });
+        console.log('CSS缓存已刷新');
+      } catch (error) {
+        console.error('刷新CSS缓存时出错:', error);
+      }
+    };
+
+    // 刷新CSS缓存
+    clearCSSCache();
+
+    // 尝试加载脚本
+    try {
+      // 由于我们可能还没有这些JS文件，所以会在控制台显示加载错误，这没关系
+      // 在实际项目中，应确保这些文件存在或进行错误处理
+      loadScript('/js/real-time-updates.js');
+      loadScript('/js/user-personalization.js');
+      loadScript('/js/promotion-notification.js');
+      loadScript('/js/ai-assistant.js');
+    } catch (error) {
+      console.error('Error during script loading:', error);
+    }
+
+    // 验证图片是否直接可访问
+    const checkImageAccessibility = async () => {
+      console.log('开始检查图片可访问性...');
+      const origin = window.location.origin;
+      
+      // 检查所有轮播图图片
+      for (let i = 1; i <= 6; i++) {
+        try {
+          // 使用fetch API检查图片是否可以获取
+          const relativeUrl = `/images/banners/banner${i}.jpg`;
+          const absoluteUrl = `${origin}${relativeUrl}`;
+          
+          console.log(`检查图片 ${i}:`, absoluteUrl);
+          const response = await fetch(absoluteUrl, { method: 'HEAD' });
+          
+          if (response.ok) {
+            console.log(`✅ 图片 ${i} 可访问，状态码:`, response.status);
+            // 记录响应头信息
+            const headers = {};
+            response.headers.forEach((value, key) => {
+              headers[key] = value;
+            });
+            console.log(`图片 ${i} 响应头:`, headers);
+          } else {
+            console.error(`❌ 图片 ${i} 不可访问，状态码:`, response.status);
+          }
+        } catch (error) {
+          console.error(`❌ 检查图片 ${i} 时出错:`, error);
+        }
+      }
+    };
+    
+    // 执行图片可访问性检查
+    checkImageAccessibility();
+
+    // 加载轮播图数据并确保图片预加载成功
+    const loadBannerImages = () => {
+      // 使用绝对路径指向build目录下的images
+      const basePath = '/build/images/banners/';
+      
+      // 定义轮播图数据
+      const bannerData = [
+        { imageUrl: `${basePath}banner1.jpg`, alt: '促销活动1', link: '/promotions/1' },
+        { imageUrl: `${basePath}banner2.jpg`, alt: '促销活动2', link: '/promotions/2' },
+        { imageUrl: `${basePath}banner3.jpg`, alt: '促销活动3', link: '/promotions/3' },
+        { imageUrl: `${basePath}banner4.jpg`, alt: '促销活动4', link: '/promotions/4' },
+        { imageUrl: `${basePath}banner5.jpg`, alt: '促销活动5', link: '/promotions/5' },
+        { imageUrl: `${basePath}banner6.jpg`, alt: '促销活动6', link: '/promotions/6' },
+      ];
+
+      // 添加加载超时处理
+      const loadingTimeout = setTimeout(() => {
+        console.log('图片加载超时，强制更新状态');
+        setBanners(bannerData);
+        setIsLoading(false);
+      }, 10000); // 10秒超时
+
+      // 预加载图片并记录结果
+      console.log('开始加载轮播图图片...');
+      const preloadPromises = bannerData.map((banner, index) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          const fullUrl = `${window.location.origin}${banner.imageUrl}`;
+          console.log(`尝试加载图片 ${index + 1}: ${fullUrl}`);
+          
+          img.onload = () => {
+            console.log(`✅ 图片 ${index + 1} 加载成功: ${fullUrl}`);
+            resolve({ success: true, index, url: fullUrl });
+          };
+          
+          img.onerror = (error) => {
+            console.error(`❌ 图片 ${index + 1} 加载失败: ${fullUrl}`, error);
+            resolve({ success: false, index, url: fullUrl, error });
+          };
+          
+          img.src = fullUrl;
+        });
+      });
+
+      // 等待所有图片预加载完成
+      Promise.all(preloadPromises).then((results) => {
+        clearTimeout(loadingTimeout); // 清除超时
+        
+        const successCount = results.filter(r => r.success).length;
+        console.log(`轮播图预加载完成: ${successCount}/${results.length} 张图片加载成功`);
+        
+        // 更新轮播图数据状态
+        setBanners(bannerData);
+        setIsLoading(false);
+      }).catch(error => {
+        // 处理预加载过程中的异常
+        clearTimeout(loadingTimeout); // 清除超时
+        console.error('轮播图预加载失败:', error);
+        setBanners(bannerData);
+        setIsLoading(false);
+      });
+    };
+
+    // 延迟加载轮播图，确保DOM已经完全渲染
+    setTimeout(loadBannerImages, 300);
+
+    // 记录首页访问，用于推荐系统
+    RecommendationService.recordSearch('首页访问');
+
+    // 自动轮播图 - 增加轮播间隔时间
+    const intervalId = setInterval(() => {
+      setCurrentBannerIndex(prev => 
+        prev === banners.length - 1 ? 0 : prev + 1
+      );
+    }, 6000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [banners.length]);
+
+  // 处理推荐类型的变化
+  const handleRecommendationTypeChange = (type) => {
+    setActiveRecommendationType(type);
+  };
+
+  // 轮播控制
+  const handlePrevBanner = () => {
+    setCurrentBannerIndex(prev => 
+      prev === 0 ? banners.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextBanner = () => {
+    setCurrentBannerIndex(prev => 
+      prev === banners.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  // 处理发送消息给AI
+  const handleSendMessageToAI = async (message) => {
+    if (!message.trim() || isAiLoading) return;
+    
+    // 添加用户消息到消息列表
+    const userMessage = { 
+      isUser: true, 
+      content: message, 
+      timestamp: new Date().toISOString() 
+    };
+    
+    setAiMessages(prev => [...prev, userMessage]);
+    setIsAiLoading(true);
+    setStreamingMessage("");
+    
+    try {
+      // 分析用户问题，获取建议操作
+      const analysis = await AiShoppingAssistant.analyzeUserQuestion(message);
+      
+      // 如果是产品推荐或比较请求，获取智能推荐
+      let productRecommendations = [];
+      if (analysis.suggestedAction && 
+          (analysis.suggestedAction.type === 'RECOMMEND_PRODUCTS' || 
+           analysis.suggestedAction.type === 'COMPARE_PRODUCTS')) {
+        productRecommendations = await AiShoppingAssistant.getSmartRecommendations(message);
+      }
+      
+      // 以流式方式获取 AI 响应
+      let isFirst = true;
+      let responseText = '';
+      
+      await streamEnhancedMessageToAI(
+        message,
+        (chunk, isRecommendation = false) => {
+          if (!isRecommendation) {
+            if (isFirst) {
+              setAiMessages(prev => [
+                ...prev, 
+                { 
+                  isUser: false, 
+                  content: chunk, 
+                  isStreaming: true,
+                  timestamp: new Date().toISOString() 
+                }
+              ]);
+              isFirst = false;
+            } else {
+              setAiMessages(prev => {
+                const newMessages = [...prev];
+                const lastMessage = newMessages[newMessages.length - 1];
+                lastMessage.content += chunk;
+                return newMessages;
+              });
+            }
+            
+            responseText += chunk;
+            setStreamingMessage(prev => prev + chunk);
+          }
+        }
+      );
+      
+      // 流式传输完成后清除流式状态
+      setAiMessages(prev => {
+        const newMessages = [...prev];
+        const lastMessage = newMessages[newMessages.length - 1];
+        if (lastMessage && !lastMessage.isUser) {
+          lastMessage.isStreaming = false;
+          
+          // 如果有产品推荐且AI没有已经推荐产品，添加产品推荐到响应中
+          if (productRecommendations.length > 0 && 
+              !lastMessage.content.includes("[[product:") && 
+              !lastMessage.content.includes("为您推荐以下商品")) {
+            
+            const formattedRecommendations = AiShoppingAssistant.formatProductRecommendations(
+              productRecommendations, 
+              message
+            );
+            
+            lastMessage.content += "\n\n" + formattedRecommendations;
+          }
+        }
+        return newMessages;
+      });
+      
+      setStreamingMessage("");
+    } catch (error) {
+      console.error('AI响应生成失败:', error);
+      setAiMessages(prev => [
+        ...prev,
+        {
+          isUser: false,
+          content: "抱歉，我暂时无法回答您的问题。请稍后再试。",
+          timestamp: new Date().toISOString()
+        }
+      ]);
+    } finally {
+      setIsAiLoading(false);
+    }
+  };
+
+  return (
+    <div className="home-page">
+      {/* 导航栏（包含顶部登录栏） */}
+      <Navbar />
+
+      {/* 促销公告横幅 */}
+      <PromotionBanner announcements={homeAnnouncements} />
+
+      {/* 主内容区 */}
+      <div className="main-content-wrapper">
+        <div className="main-content">
+          
+          {/* 分类侧边栏、轮播图和用户区域的Grid容器 */}
+          <div className="top-section-container ds-fade-in">
+            {/* 分类导航卡片 */}
+            <div className="categories-cards">
+              <div className="ds-card category-nav-card">
+                <div className="ds-card-header">
+                  <div className="ds-card-title">全部分类</div>
+                </div>
+                <div className="category-grid">
+                  {categories.map(category => (
+                    <Link key={category.id} to={category.path} className="category-item-card">
+                      <div className="category-icon" style={{backgroundColor: `${category.color}20`, color: category.color}}>
+                        <FontAwesomeIcon icon={faBolt} />
+                      </div>
+                      <div className="category-name">{category.name}</div>
+                    </Link>
+                  ))}
+                  <Link to="/categories" className="category-item-card category-more">
+                    <div className="category-icon" style={{backgroundColor: '#f1f1f1', color: '#666'}}>
+                      <FontAwesomeIcon icon={faChevronRight} />
+                    </div>
+                    <div className="category-name">更多分类</div>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* 轮播图区域 */}
+            <div className="promotion-carousel ds-rounded-lg ds-shadow-md">
+              {isLoading ? (
+                <div className="carousel-placeholder" style={{
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  justifyContent: 'center', 
+                  alignItems: 'center', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa', 
+                  color: '#6c757d', 
+                  textAlign: 'center', 
+                  padding: '20px'
+                }}>
+                  <div style={{fontSize: '24px', marginBottom: '15px', fontWeight: 'bold'}}>正在加载轮播图...</div>
+                  <div style={{fontSize: '16px', marginBottom: '20px'}}>
+                    <div className="ds-skeleton" style={{width: '90%', height: '70%', margin: '0 auto'}}></div>
+                  </div>
+                </div>
+              ) : banners && banners.length > 0 ? (
+                <div className="carousel-container">
+                  <div className="carousel-inner" style={{transform: `translateX(-${currentBannerIndex * 100}%)`}}>
+                    {banners.map((banner, index) => (
+                      <div key={index} className="carousel-slide">
+                        <Link to={banner.link || '#'}>
+                          <img 
+                            src={banner.imageUrl}
+                            alt={banner.alt || '促销活动'} 
+                            className="carousel-image"
+                            style={{width: '100%', height: '100%', objectFit: 'cover'}}
+                            onLoad={(e) => {
+                              console.log(`✅ 轮播图${index + 1}渲染成功`);
+                            }}
+                            onError={(e) => {
+                              console.error(`❌ 轮播图${index + 1}渲染失败:`, banner.imageUrl);
+                              
+                              // 尝试使用绝对路径
+                              const absoluteUrl = `${window.location.origin}${banner.imageUrl}`;
+                              console.log(`尝试使用绝对路径: ${absoluteUrl}`);
+                              e.target.src = absoluteUrl;
+                              
+                              // 如果仍然失败，尝试build目录
+                              e.target.onerror = () => {
+                                const buildUrl = `${window.location.origin}/build/images/banners/banner${index + 1}.jpg`;
+                                console.log(`尝试使用build绝对路径: ${buildUrl}`);
+                                e.target.src = buildUrl;
+                                
+                                // 如果仍然失败，显示占位图
+                                e.target.onerror = () => {
+                                  console.error(`所有尝试都失败`);
+                                  e.target.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 522 750"><rect width="100%" height="100%" fill="%23f8f9fa"/><text x="50%" y="50%" font-family="Arial" font-size="24" text-anchor="middle" fill="%23dc3545">图片${index + 1}加载失败</text></svg>`;
+                                };
+                              };
+                            }}
+                          />
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* 轮播控制 */}
+                  <button className="carousel-control carousel-prev" onClick={handlePrevBanner}>
+                    <FontAwesomeIcon icon={faChevronRight} rotation={180} />
+                  </button>
+                  <button className="carousel-control carousel-next" onClick={handleNextBanner}>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </button>
+                  
+                  {/* 轮播指示器 */}
+                  <div className="carousel-indicators">
+                    {banners.map((_, index) => (
+                      <span 
+                        key={index} 
+                        className={`carousel-indicator ${index === currentBannerIndex ? 'active' : ''}`}
+                        onClick={() => setCurrentBannerIndex(index)}
+                      ></span>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="carousel-placeholder" style={{
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  justifyContent: 'center', 
+                  alignItems: 'center', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa', 
+                  color: '#6c757d', 
+                  textAlign: 'center', 
+                  padding: '20px'
+                }}>
+                  <div style={{fontSize: '24px', marginBottom: '15px', fontWeight: 'bold'}}>未找到轮播图</div>
+                  <div style={{fontSize: '16px', marginBottom: '20px'}}>请检查图片路径是否正确</div>
+                  
+                  <div style={{display: 'flex', gap: '10px', marginBottom: '20px'}}>
+                    <img 
+                      src="/build/images/banners/banner1.jpg" 
+                      alt="测试图片1" 
+                      style={{width: '120px', height: '180px', objectFit: 'cover', border: '1px solid #ddd'}}
+                      onError={(e) => {
+                        e.target.style.display = 'block';
+                        e.target.style.width = '120px';
+                        e.target.style.height = '180px';
+                        e.target.style.backgroundColor = '#f5f5f5';
+                        e.target.style.display = 'flex';
+                        e.target.style.alignItems = 'center';
+                        e.target.style.justifyContent = 'center';
+                        e.target.innerText = '加载失败';
+                      }}
+                    />
+                    <img 
+                      src="/build/images/banners/banner2.jpg" 
+                      alt="测试图片2" 
+                      style={{width: '120px', height: '180px', objectFit: 'cover', border: '1px solid #ddd'}}
+                      onError={(e) => {
+                        e.target.style.display = 'block';
+                        e.target.style.width = '120px';
+                        e.target.style.height = '180px';
+                        e.target.style.backgroundColor = '#f5f5f5';
+                        e.target.style.display = 'flex';
+                        e.target.style.alignItems = 'center';
+                        e.target.style.justifyContent = 'center';
+                        e.target.innerText = '加载失败';
+                      }}
+                    />
+                  </div>
+                  
+                  <div>
+                    <p>绝对路径测试:</p>
+                    <img 
+                      src={`${window.location.origin}/build/images/banners/banner1.jpg`} 
+                      alt="绝对路径测试" 
+                      style={{width: '120px', height: '180px', objectFit: 'cover', border: '1px solid #ddd'}}
+                      onError={(e) => {
+                        e.target.style.display = 'block';
+                        e.target.style.width = '120px';
+                        e.target.style.height = '180px';
+                        e.target.style.backgroundColor = '#f5f5f5';
+                        e.target.style.display = 'flex';
+                        e.target.style.alignItems = 'center';
+                        e.target.style.justifyContent = 'center';
+                        e.target.innerText = '加载失败';
+                      }}
+                    />
+                  </div>
+                  
+                  <ul style={{fontSize: '14px', textAlign: 'left', width: '80%', margin: '20px auto'}}>
+                    <li>图片文件路径: <code>/build/images/banners/banner1.jpg</code> 等</li>
+                    <li>绝对路径: <code>{window.location.origin}/build/images/banners/banner1.jpg</code></li>
+                    <li>请检查build目录下是否有这些图片文件</li>
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* 右侧卡片区域 */}
+            <div className="right-cards-container">
+              {/* 会员专享卡片 */}
+              <div className="ds-card ds-card-compact member-card">
+                <div className="ds-card-header">
+                  <div className="ds-card-title">会员特权</div>
+                  <Link to="/member" className="ds-link">查看特权 <FontAwesomeIcon icon={faChevronRight} size="xs" /></Link>
+                </div>
+                <div className="member-icons">
+                  <div className="member-icon-item">
+                    <div className="icon-circle">
+                      <FontAwesomeIcon icon={faTag} />
+                    </div>
+                    <span>优惠券</span>
+                  </div>
+                  <div className="member-icon-item">
+                    <div className="icon-circle">
+                      <FontAwesomeIcon icon={faGift} />
+                    </div>
+                    <span>礼品卡</span>
+                  </div>
+                  <div className="member-icon-item">
+                    <div className="icon-circle">
+                      <FontAwesomeIcon icon={faPercent} />
+                    </div>
+                    <span>折扣</span>
+                  </div>
+                  <div className="member-icon-item">
+                    <div className="icon-circle">
+                      <FontAwesomeIcon icon={faHeadset} />
+                    </div>
+                    <span>专属客服</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* 快讯卡片 */}
+              <div className="ds-card ds-card-compact news-card">
+                <div className="ds-card-header">
+                  <div className="ds-card-title">商城快讯</div>
+                  <Link to="/news" className="ds-link">更多 <FontAwesomeIcon icon={faChevronRight} size="xs" /></Link>
+                </div>
+                <ul className="news-list">
+                  <li className="news-item">
+                    <span className="news-badge news-badge-activity">活动</span>
+                    <Link to="/news/1" className="news-link">5.1劳动节大促 全场满300减50</Link>
+                  </li>
+                  <li className="news-item">
+                    <span className="news-badge news-badge-notice">公告</span>
+                    <Link to="/news/2" className="news-link">防诈骗提醒：请勿泄露个人信息</Link>
+                  </li>
+                  <li className="news-item">
+                    <span className="news-badge news-badge-new">上新</span>
+                    <Link to="/news/3" className="news-link">全新电子产品类目已上线</Link>
+                  </li>
+                </ul>
+              </div>
+              
+              {/* AI助手卡片 */}
+              <div className="ds-card ds-card-compact ai-assistant-card">
+                <div className="ai-assistant-content">
+                  <div className="ai-assistant-icon">
+                    <img src="/images/ai-assistant-icon.svg" alt="AI助手" onError={(e) => e.target.src = '/images/ai-assistant-fallback.png'} />
+                  </div>
+                  <div className="ai-assistant-text">
+                    <h3>智能购物助手</h3>
+                    <p>让AI为您推荐最合适的商品</p>
+                  </div>
+                </div>
+                <div className="ai-assistant-actions">
+                  <button className="ds-btn ds-btn-primary ds-btn-block" onClick={() => setShowAIAssistant(true)}>
+                    <FontAwesomeIcon icon={faComments} className="ds-btn-icon" />
+                    快速咨询
+                  </button>
+                  <Link to="/ai-shopping" className="ds-btn ds-btn-outline ds-btn-block">
+                    <FontAwesomeIcon icon={faShoppingBag} className="ds-btn-icon" />
+                    AI导购体验
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 活动推荐区域 */}
+          <section className="featured-activities ds-slide-in-up">
+            <div className="ds-flex ds-justify-between ds-items-center ds-mb-4">
+              <h2 className="section-title">活动专区</h2>
+              <Link to="/activities" className="ds-link ds-link-more">
+                更多活动 <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+            </div>
+            
+            <div className="activities-grid">
+              {/* 活动卡片1：限时秒杀 */}
+              <div className="ds-card activity-card flash-sale-card">
+                <div className="price-tag price-tag-premium">
+                  <span>¥199.00</span>
+                </div>
+                <div className="activity-card-header">
+                  <h3><FontAwesomeIcon icon={faBolt} className="icon-flash" /> 限时秒杀</h3>
+                  <div className="countdown-timer">
+                    <FontAwesomeIcon icon={faClock} /> 
+                    <span id="flash-countdown">23:59:59</span>
+                  </div>
+                </div>
+                <div className="activity-products">
+                  {[1, 2].map(item => (
+                    <div key={item} className="activity-product">
+                      <img 
+                        src={`/images/products/flash-sale-${item}.jpg`} 
+                        alt={`秒杀商品${item}`} 
+                        onError={(e) => handleImageError(e, 'product', `秒杀商品${item}`)}
+                      />
+                      <div className="product-price">
+                        <span className="current-price">¥99</span>
+                        <span className="original-price">¥199</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <Link to="/flash-sale" className="ds-btn ds-btn-outline ds-btn-block">
+                  立即抢购
+                </Link>
+              </div>
+              
+              {/* 活动卡片2：新品首发 */}
+              <div className="ds-card activity-card new-arrival-card">
+                <div className="price-tag price-tag-premium">
+                  <span>¥129.00</span>
+                </div>
+                <div className="activity-card-header">
+                  <h3><FontAwesomeIcon icon={faStar} className="icon-new" /> 新品首发</h3>
+                </div>
+                <div className="activity-products">
+                  {[1, 2].map(item => (
+                    <div key={item} className="activity-product">
+                      <img 
+                        src={`/images/products/new-arrival-${item}.jpg`} 
+                        alt={`新品${item}`} 
+                        onError={(e) => handleImageError(e, 'product', `新品${item}`)}
+                      />
+                      <div className="product-name">全新上市商品{item}</div>
+                    </div>
+                  ))}
+                </div>
+                <Link to="/new-arrivals" className="ds-btn ds-btn-outline ds-btn-block">
+                  查看新品
+                </Link>
+              </div>
+              
+              {/* 活动卡片3：特惠专区 */}
+              <div className="ds-card activity-card special-offer-card">
+                <div className="price-tag price-tag-premium">
+                  <span>¥149.00</span>
+                </div>
+                <div className="activity-card-header">
+                  <h3><FontAwesomeIcon icon={faPercent} className="icon-offer" /> 特惠专区</h3>
+                </div>
+                <div className="activity-products">
+                  {[1, 2].map(item => (
+                    <div key={item} className="activity-product">
+                      <img 
+                        src={`/images/products/special-offer-${item}.jpg`} 
+                        alt={`特惠商品${item}`} 
+                        onError={(e) => handleImageError(e, 'product', `特惠商品${item}`)}
+                      />
+                      <div className="offer-tag">满200减30</div>
+                    </div>
+                  ))}
+                </div>
+                <Link to="/special-offers" className="ds-btn ds-btn-outline ds-btn-block">
+                  浏览特惠
+                </Link>
+              </div>
+              
+              {/* 活动卡片4：人气爆款 */}
+              <div className="ds-card activity-card popular-card">
+                <div className="price-tag price-tag-premium">
+                  <span>¥179.00</span>
+                </div>
+                <div className="activity-card-header">
+                  <h3><FontAwesomeIcon icon={faFire} className="icon-popular" /> 人气爆款</h3>
+                </div>
+                <div className="activity-products">
+                  {[1, 2].map(item => (
+                    <div key={item} className="activity-product">
+                      <img 
+                        src={`/images/products/popular-${item}.jpg`} 
+                        alt={`人气商品${item}`} 
+                        onError={(e) => handleImageError(e, 'product', `人气商品${item}`)}
+                      />
+                      <div className="popularity-tag"><FontAwesomeIcon icon={faFire} /> 热销2000+</div>
+                    </div>
+                  ))}
+                </div>
+                <Link to="/popular" className="ds-btn ds-btn-outline ds-btn-block">
+                  查看爆款
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* 个性化推荐区域 */}
+          <section className="personalized-recommendations ds-slide-in-up">
+            <div className="section-header">
+              <h2 className="section-title">为您推荐</h2>
+              <Link to="/products" className="ds-link ds-link-more">
+                更多推荐 <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+            </div>
+            
+            <div className="recommendation-tags">
+              <span 
+                className={`ds-tag ${activeRecommendationType === 'personalized' ? 'ds-tag-primary' : ''}`}
+                onClick={() => handleRecommendationTypeChange('personalized')}
+              >
+                猜你喜欢
+              </span>
+              <span 
+                className={`ds-tag ${activeRecommendationType === 'similar' ? 'ds-tag-primary' : ''}`}
+                onClick={() => handleRecommendationTypeChange('similar')}
+              >
+                相似推荐
+              </span>
+              <span 
+                className={`ds-tag ${activeRecommendationType === 'popular' ? 'ds-tag-primary' : ''}`}
+                onClick={() => handleRecommendationTypeChange('popular')}
+              >
+                热门商品
+              </span>
+            </div>
+            
+            <div className="recommendation-products">
+              <ProductRecommendations 
+                type={activeRecommendationType} 
+                title="" 
+                limit={10} 
+                showViewMore={false}
+              />
+            </div>
+          </section>
+
+          {/* 促销活动区域 */}
+          <section className="promotion-section ds-slide-in-up">
+            <div className="section-header">
+              <h2 className="section-title">热门促销</h2>
+              <Link to="/promotions" className="ds-link ds-link-more">
+                查看全部 <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+            </div>
+            
+            <div className="promotions-grid">
+              {/* 促销卡片1 */}
+              <div className="ds-card promotion-card">
+                <div className="promotion-image">
+                  <img 
+                    src={getPromotionImageUrl(null, "限时折扣", 280, 160)} 
+                    alt="限时折扣" 
+                    onError={(e) => handleImageError(e, 'promotion', '限时折扣')}
+                  />
+                  <div className="ds-badge ds-badge-primary promotion-badge">限时</div>
+                </div>
+                <div className="promotion-content">
+                  <h3 className="promotion-title">春季特惠</h3>
+                  <p className="promotion-desc">全场服装5折起，限时3天</p>
+                  <div className="promotion-timer">
+                    <FontAwesomeIcon icon={faClock} />
+                    <span className="timer">23:59:59</span>
+                  </div>
+                  <Link to="/promotion/1" className="ds-btn ds-btn-primary ds-btn-sm">立即查看</Link>
+                </div>
+              </div>
+              
+              {/* 促销卡片2 */}
+              <div className="ds-card promotion-card">
+                <div className="promotion-image">
+                  <img 
+                    src={getPromotionImageUrl(null, "满减优惠", 280, 160)} 
+                    alt="满减优惠" 
+                    onError={(e) => handleImageError(e, 'promotion', '满减优惠')}
+                  />
+                  <div className="ds-badge ds-badge-secondary promotion-badge">满减</div>
+                </div>
+                <div className="promotion-content">
+                  <h3 className="promotion-title">数码盛宴</h3>
+                  <p className="promotion-desc">数码产品满1000减100</p>
+                  <div className="promotion-date">
+                    <FontAwesomeIcon icon={faCalendarAlt} />
+                    <span>截止日期: 2023-05-30</span>
+                  </div>
+                  <Link to="/promotion/2" className="ds-btn ds-btn-primary ds-btn-sm">立即查看</Link>
+                </div>
+              </div>
+              
+              {/* 促销卡片3 */}
+              <div className="ds-card promotion-card">
+                <div className="promotion-image">
+                  <img 
+                    src={getPromotionImageUrl(null, "新品促销", 280, 160)} 
+                    alt="新品促销" 
+                    onError={(e) => handleImageError(e, 'promotion', '新品促销')}
+                  />
+                  <div className="ds-badge ds-badge-success promotion-badge">新品</div>
+                </div>
+                <div className="promotion-content">
+                  <h3 className="promotion-title">新品尝鲜</h3>
+                  <p className="promotion-desc">新品上架，首发特惠</p>
+                  <div className="promotion-date">
+                    <FontAwesomeIcon icon={faCalendarAlt} />
+                    <span>截止日期: 2023-06-15</span>
+                  </div>
+                  <Link to="/promotion/3" className="ds-btn ds-btn-primary ds-btn-sm">立即查看</Link>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 底部服务保障区域 */}
+          <section className="service-guarantee ds-slide-in-up">
+            <div className="service-items">
+              <div className="service-item">
+                <FontAwesomeIcon icon={faShoppingBag} className="service-icon" />
+                <span>正品保障</span>
+                <p>正品保障，假一赔十</p>
+              </div>
+              <div className="service-item">
+                <FontAwesomeIcon icon={faBolt} className="service-icon" />
+                <span>急速配送</span>
+                <p>多仓直发，极速配送</p>
+              </div>
+              <div className="service-item">
+                <FontAwesomeIcon icon={faShoppingCart} className="service-icon" />
+                <span>无忧退换</span>
+                <p>7天无理由退换</p>
+              </div>
+              <div className="service-item">
+                <FontAwesomeIcon icon={faHeadset} className="service-icon" />
+                <span>优质服务</span>
+                <p>全程服务支持</p>
+              </div>
+              <div className="service-item">
+                <FontAwesomeIcon icon={faTag} className="service-icon" />
+                <span>特色服务</span>
+                <p>私人定制家电服务</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      
+      {/* 底部区域 */}
+      <Footer />
+      
+      {/* AI购物助手浮动按钮 */}
+      <div className="ai-floating-button" onClick={() => setShowAIAssistant(!showAIAssistant)}>
+        <FontAwesomeIcon icon={faRobot} />
+        <span>AI助手</span>
+      </div>
+      
+      {/* AI购物助手聊天界面 */}
+      {showAIAssistant && (
+        <div className="ai-floating-chat">
+          <div className="ai-floating-chat-container">
+            <ChatInterface 
+              messages={aiMessages}
+              isLoading={isAiLoading}
+              streamingMessage={streamingMessage}
+              onSendMessage={handleSendMessageToAI}
+            />
+          </div>
+          <div className="ai-floating-chat-overlay" onClick={() => setShowAIAssistant(false)}></div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Home;
